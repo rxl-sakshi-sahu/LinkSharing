@@ -5,7 +5,7 @@ class Topic {
     Date dateCreated
     Date lastUpdated
 
-    //static hasMany = [resource: Resource, subsciption: Subscription]
+    static hasMany = [resource: Resource, subsciption: Subscription]
 
     static constraints = {
 

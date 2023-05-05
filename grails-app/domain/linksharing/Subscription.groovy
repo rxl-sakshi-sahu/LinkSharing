@@ -7,5 +7,6 @@ class Subscription {
     SeriousnessEnum seriousness
 //    static belongsTo = [topic: Topic, user: User]
     static constraints = {
+
     }
 }

@@ -10,4 +10,7 @@ class Resource {
     //static hasMany = [readingItem:ReadingItem ,resourceRating:ResourceRating]
     static constraints = {
     }
+    static mapping = {
+        table 'RESOURCE_TABLE'
+    }
 }
