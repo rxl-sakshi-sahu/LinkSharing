@@ -36,7 +36,7 @@
                                 <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
                             </div>
                             <div class="col-8">
-                                <h4>Welcome, ${session.email}!</h4>
+                                <h4>Welcome, ${session.username}!</h4>
 %{--                                <p>Your email address is: ${session.user.email}</p>--}%
                                 <p style="margin-bottom: 0%;">@Uday</p>
                                 <div style="display: flex;">
