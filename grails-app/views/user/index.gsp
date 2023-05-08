@@ -17,7 +17,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="dashboard.html">LinkSharing</a>
+            <a class="navbar-brand" href="#">LinkSharing</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -177,22 +177,23 @@
                 <div class="card-body" style="padding-bottom: 0%;">
 
                     <!--   Login details-->
+                <g:form controller= 'User' action='auth'>
                     <div class="form-outline mb-sm-0">
-                        <input type="email" id="form2Example1" class="form-control" />
-                        <label class="form-label" for="form2Example1">Email address</label>
+                        <input type="email" id="mail" name="email" class="form-control" />
+                        <label class="form-label" for="email">Username / Email address</label>
                     </div>
-
                     <!-- Password input -->
                     <div class="form-outline" style="padding-bottom: 0%;">
-                        <input type="password" id="form2Example2" class="form-control" />
-                        <label class="form-label" for="form2Example2">Password</label>
+                        <input type="password" id="passwd" name="password" class="form-control" />
+                        <label class="form-label" for="password">Password</label>
                     </div>
                     <div style="display: flex; padding-top: 0%;">
                         <a href="#">Forgot Password</a>
                         <div style="padding-left: 40%; padding-top: 0%; padding-bottom: 2%;">
-                            <button type="button" class="btn btn-secondary">Login</button>
+                            <button type="submit" class="btn btn-secondary">Login</button>
                         </div>
                     </div>
+                </g:form>
                 </div>
                 <!-- <button type="button" class="btn btn-primary"  style="padding-left: 2.5rem; padding-right: 2.5rem;">Primary</button> -->
             </div>

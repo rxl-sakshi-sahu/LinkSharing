@@ -120,7 +120,7 @@ dataSource {
 environments {
     development {
         dataSource {
-            dbCreate = 'create-drop'
+            dbCreate = 'create'
             url = 'jdbc:oracle:thin:@127.0.0.1:1521/orcl'
         }
     }
@@ -147,3 +147,5 @@ environments {
         }
     }
 }
+
+//runtime 'org.grails.plugins:grails-console:2.1.1'

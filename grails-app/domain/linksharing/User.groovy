@@ -14,16 +14,27 @@ class User {
 
     static hasMany = [topic: Topic, subscription: Subscription, resource: Resource, readingItem:ReadingItem]
     static constraints = {
-        email email: true, blank: false //, unique:true
-        username blank: false, nullable: false
-        firstName blank: false, nullable: false
-        lastName blank: false, nullable: false
-        password blank: false, nullable: false
+        email email: true, blank: false, unique:true
+        username blank: true
+        firstName blank: false
+        lastName blank: false
+        password blank: false
         photo nullable: true
         dateCreated blank: false, date: true
         lastUpdated blank: false, date: true
     }
+//    static findByLogin(login) {
+//        def user = User.findByUsername(login)
+//        if (!user) {
+//            user = User.findByEmail(login)
+//        }
+//        return user
+//    }
     static mapping = {
         table 'USER_TABLE'
     }
+
+//    static namedQueries = {
+//
+//    }
 }
