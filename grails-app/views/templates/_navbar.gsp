@@ -26,42 +26,49 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex">
+            <g:form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            </form>
+            </g:form>
             <!-- <i style='font-size:24px' class='fas'>&#xf075;</i> -->
 
             <i style="font-size:24px; padding-left: 15px;" class="bi bi-chat-fill">   </i> <!--&#xF24B;-->
-            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter">
-                <i style="font-size:24px" class="fa">&#xf0e0;</i>
+            <button type="button" class="btn btn-link" >
+               <a data-bs-toggle="modal" data-bs-target="#createTopic" data-bs-whatever="createTopic">
+                   <i style="font-size:24px" class="fa">&#xf0e0;</i>
+               </a>
+
             </button>
             <a href='sharelink_modal.html'><i style="font-size:24px" class="bi bi-link-45deg"></i></a> <!--&#xF470; -->
 
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal fade" id="createTopic" tabindex="-1" aria-labelledby="createTopic" aria-hidden="true">
+                <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Share Document</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Create Topic</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Document:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
+                            <g:form action="index" controller="topic">
+                                <div class="mb-3 d-flex ">
+                                    <label for="recipient-name" class="col-form-label me-5">Topic: </label>
+                                    <input type="text" class="form-control" name="topicName" id="topic">
                                 </div>
-                                <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Description:</label>
-                                    <textarea class="form-control" id="message-text"></textarea>
+                            %{-- <g:hiddenField name="createdBy" value="${session.currentUser}" />--}%
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <label for="message-text" class="col-form-label me-5">Visibility:</label>
+                                    <select class="form-select rounded" name="visibilityEnum" aria-label="Default select example">
+                                        <option selected value="PUBLIC">Public</option>
+                                        <option value="PRIVATE">Private</option>
+                                    </select>
                                 </div>
-                            </form>
+                                <div class="modal-footer">
+
+                                    <button type="submit" class="btn btn-primary">Save </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </g:form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Share</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        </div>
+
                     </div>
                 </div>
             </div>

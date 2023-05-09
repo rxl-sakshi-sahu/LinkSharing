@@ -2,6 +2,8 @@ package linksharing
 
 class LoginController {
 
-    def index() { }
+    def index() {}
+
+
 
 }
