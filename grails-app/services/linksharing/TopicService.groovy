@@ -11,9 +11,7 @@ class TopicService {
 //        topicDao.count()
 //    }
         def serviceMethod() {
-        Topic topic = new Topic()
-        topic.name = params.topicName
-        topic.createdBy = user
+            Topic topic = new Topic(topicName:params.get("topicName"), createdBy: user)
         if(params.VisibilityEnum == 'Public'){
             topic.VisibilityEnum = VisibilityEnum.PUBLIC
         }

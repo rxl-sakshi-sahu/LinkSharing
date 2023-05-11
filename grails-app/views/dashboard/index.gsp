@@ -22,6 +22,12 @@
 
 <body>
 <g:render template="/templates/navbar"/>
+<div>
+<g:if test="${flash.message}">
+    <div class="alert alert-success">${flash.message}
+    <button type="button" class="btn-close" aria-label="Close" style="display: inline-block; margin-left: 70%"></button>
+</g:if>
+</div>
 <div style="display: flex;">
 
     <!-- ************* Card ******************** -->
@@ -36,7 +42,7 @@
                                 <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
                             </div>
                             <div class="col-8">
-                                <h4>Welcome, ${session.username}!</h4>
+                                <h4>Welcome, ${session.user}!</h4>
 %{--                                <p>Your email address is: ${session.user.email}</p>--}%
                                 <p style="margin-bottom: 0%;">@Uday</p>
                                 <div style="display: flex;">

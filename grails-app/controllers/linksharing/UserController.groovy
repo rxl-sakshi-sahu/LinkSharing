@@ -3,7 +3,12 @@ class UserController {
 
     def index()
     {
+        render(view:'index')
+    }
 
+    def logout() {
+        session.invalidate()
+        redirect(action: 'index')
     }
 
     def RegisterUser()
@@ -12,7 +17,8 @@ class UserController {
         def user = new User(params)
         println user
         user.save(flush:true, failOnError:true)
-        render(views:'index')
+        flash.message="You are registered successfully!"
+        redirect(action: 'index')
     }
 
     def auth() {
@@ -25,10 +31,11 @@ class UserController {
         }
         def email = params.email
         def password = params.password
-
+        def isAdmin = params.admin
         if(user.email==email || user.username== email) {
-            if (user.password == password) {
+            if (user.password == password && user.active== true) {
                 session.user = user.username
+                session.isAdmin = user.admin
                 redirect(controller: "Dashboard", action: "index")
             } else {
                 flash.message = "Incorrect details, Please try again!"
@@ -36,13 +43,4 @@ class UserController {
             }
         }
     }
-
-//    def editProfile() {
-//        def user = User.findByUsername(session.username)
-//        if (!user) {
-//            redirect(controller: 'User', action: 'index')
-//            return
-//        }
-//        [user: user]
-//    }
 }

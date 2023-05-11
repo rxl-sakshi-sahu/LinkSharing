@@ -2,8 +2,7 @@ package linksharing
 
 class LoginController {
 
-    def index() {}
-
-
-
+    def index() {
+        redirect(controller:'User', action:'editProfile')
+    }
 }

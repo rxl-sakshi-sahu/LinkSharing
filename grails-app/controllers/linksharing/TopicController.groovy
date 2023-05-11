@@ -3,11 +3,6 @@ package linksharing
 import enums.VisibilityEnum
 
 class TopicController {
-
-//    def index() {
-
-//    }
-
     def index() {
 //        def topicCount= topicService.getTopicCount()
 //        [topicCount: topicCount]
@@ -15,16 +10,21 @@ class TopicController {
       def username= session.user
         def t = new Topic(params)
         User user=User.findByUsername(username)
-        //println params
+//      println "################################33"
+//        println params
         //print user
         t.createdBy = user
-        String s ='Public'
+
 
         VisibilityEnum x = VisibilityEnum."${params.visibilityEnum}"
         println x.getClass()
         t.visibilityEnum = x
         t.save(flush:true,failOnError:true)
 
+        flash.message="Topic created successfully"
+        redirect(controller:"dashboard", action:"index")
+    }
+}
 //       Topic topic = new Topic(topicName:params.get("topicName"), createdBy: user)
 //        bindData(topic, params)
 //        if(topic.hasErrors())
@@ -33,13 +33,7 @@ class TopicController {
 //                println it
 //            }
 //        }
-//
-//        if(params.VisibilityEnum == 'public'){
-//            topic.VisibilityEnum = VisibilityEnum.PUBLIC
-//        }
-//        else {
-//            topic.VisibilityEnum = VisibilityEnum.PRIVATE
-//        }
+
 //        if(topic.save())
 //        {
 //            flash.message= "topic saved"
@@ -48,9 +42,5 @@ class TopicController {
 //        else {
 //            flash.error="topic cannot be blank"
 ////        }
-//        redirect(controller:"dashboard", action:"index")
-//        topic.save(flush:true, failOnError:true)
-      render(view: "index")
-    }
-}
+
 
