@@ -6,8 +6,8 @@ class Resource {
     Topic topic
     Date dateCreated
     Date lastUpdated
-   // static belongsTo = [topic: Topic]
-    //static hasMany = [readingItem:ReadingItem ,resourceRating:ResourceRating]
+    static belongsTo = [topic: Topic]
+    static hasMany = [readingItem:ReadingItem ,resourceRating:ResourceRating]
     static constraints = {
     }
     static mapping = {

@@ -5,7 +5,7 @@ class Subscription {
     User user
     Date dateCreated
     SeriousnessEnum seriousness
-//    static belongsTo = [topic: Topic, user: User]
+    static belongsTo = [topic: Topic, user: User]
     static constraints = {
 
     }

@@ -8,8 +8,6 @@
 </head>
 <body>
 <g:render template="/templates/navbar"/>
-%{--        <p>Topic created</p>--}%
-
 <g:renderErrors />
 </body>
 </html>

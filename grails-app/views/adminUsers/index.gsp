@@ -56,35 +56,27 @@
                         <td>${user.lastName}</td>
                         <td>${user.active}</td>
                         <td>
-                            <script>
-                                function toggleText(link) {
-                                    // console.log((link.innerHTML === 'Activate'));
-                                    if (link.innerHTML === 'Activate') {
-                                        link.innerHTML = 'Deactivate';
-
-                                    } else {
-                                        link.innerHTML = 'Activate';
-                                    }
-                                }
-                            </script>
-                            <g:link controller="adminUsers" action="updateStatus" id="${user.id}" params="[user:user]" onclick= "toggleText(this)">
-
-                            </g:link>
-                        </td>
 %{--                            <script>--}%
-%{--                                <a href="#" onclick="toggleText(this)">Activate</a>--}%
-%{--                            function toggleText(link) {--}%
+%{--                                function toggleText(link)--}%
+%{--                                {--}%
+%{--                                    // console.log((link.innerHTML === 'Activate'));--}%
 %{--                                    if (link.innerHTML === 'Activate') {--}%
 %{--                                        link.innerHTML = 'Deactivate';--}%
-
 %{--                                    } else {--}%
 %{--                                        link.innerHTML = 'Activate';--}%
 %{--                                    }--}%
 %{--                                }--}%
 %{--                            </script>--}%
-
-
-%{--                        <td>--}%
+                            <g:link controller="adminUsers" action="updateStatus" id="${user.id}" params="[user:user]">
+                                    <g:if test="${user.active==true}">
+                                        Deactivate
+                                    </g:if>
+                                <g:else>
+                                    Activate
+                                </g:else>
+                            </g:link>
+                        </td>
+%{--
 %{--                            <g:link controller="adminUsers" action="updateStatus" params="user.id">--}%
 %{--                            <a href="#" onclick="toggleText(this)">Activate</a>--}%
 %{--                            <script>--}%

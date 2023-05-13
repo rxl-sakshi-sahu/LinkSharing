@@ -5,12 +5,13 @@ import grails.gorm.transactions.Transactional
 
 @Transactional
 class TopicService {
-   // def topicDao // inject the DAO for the Topic domain class
 
-//    int getTopicCount() {
-//        topicDao.count()
-//    }
-        def serviceMethod() {
+    int getTopicCount() {
+        def user = User.get(1)
+        def topicCount = Topic.countByCreatedBy(user)
+        return topicCount
+    }
+    def serviceMethod() {
             Topic topic = new Topic(topicName:params.get("topicName"), createdBy: user)
         if(params.VisibilityEnum == 'Public'){
             topic.VisibilityEnum = VisibilityEnum.PUBLIC

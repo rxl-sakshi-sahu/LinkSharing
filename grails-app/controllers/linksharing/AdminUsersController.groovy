@@ -17,10 +17,10 @@ class AdminUsersController {
 //        flash.message = "User ${user.username} has been activated."
 //        redirect(action: "index")
 //    }
-
+//
 //    def activate(){
-//        User u= User.get(params.get("id"))
-//        User u1= User.findById(params.get("id"))
+//        User u= User.get(params.getElementById())
+//        User u1= User.findById(params.getElementById())
 //        u.username = u1.username
 //        u.email = u1.email
 //        u.firstName = u1.firstName
@@ -38,12 +38,12 @@ class AdminUsersController {
 //    }
 
     def updateStatus() {
+        println params
         def user = User.get(params.id)
         if (user) {
-            user.active = (!params.active)
+            user.active = !user.active
             println params
             user.save(flush:true)
-
         } else {
             flash.error = "User not found."
         }

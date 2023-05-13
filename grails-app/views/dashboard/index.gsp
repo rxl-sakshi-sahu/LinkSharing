@@ -49,11 +49,13 @@
                                     <p>Subscriptions</p>
                                     <p style="margin-left: auto;">Topic</p>
                                 </div>
+                                <g:form controller="topic" action="topic">
                                 <div style="display: flex;">
                                     <!-- index.gsp -->
 
                                     <a href="#" class="card-link">topic:${topicCount}</a>
                                     <a href="#" class="card-link" style="margin-left: auto;">30</a>
+                                    </g:form>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +136,7 @@
     </div>
 </div>
 
-<div class="card" style="width: 25rem; padding: 10px; margin: 30px;">
+<div class="card" style="width: 25rem; padding: 0px; margin: 30px;">
     <div class="card-header" style="display: flex;">
         <p>Trending Topics</p>
         <a href="#" class="card-link" style="margin-left: auto;">View All</a>

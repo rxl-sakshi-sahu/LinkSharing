@@ -40,7 +40,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-3">
-                                <img src="user.png" alt="user" class="image">
+                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
                             </div>
                             <div class="col-8">
                                 <div class="col"><a href="#" class="card-link">Grails</a></div>
@@ -65,7 +65,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-3">
-                                <img src="user.png" alt="user" class="image">
+                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
                             </div>
                             <div class="col-8">
                                 <div class="col"><a href="#" class="card-link">Grails</a></div>
@@ -95,7 +95,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-3">
-                                <img src="user.png" alt="user" class="image">
+                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
                             </div>
                             <div class="col-8">
                                 <div class="col"><a href="#" class="card-link">Grails</a></div>
@@ -108,8 +108,6 @@
                                     <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
                                     <div class="col"><a href="#" class="card-link">50</a></div>
                                     <div class="col"><a href="#" class="card-link">30</a></div>
-
-                                    <!-- </div> -->
                                 </div>
                             </div>
                         </div>
@@ -120,7 +118,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-3">
-                                <img src="user.png" alt="user" class="image">
+                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
                             </div>
                             <div class="col-8">
                                 <div class="col"><a href="#" class="card-link">Grails</a></div>

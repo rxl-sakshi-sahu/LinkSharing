@@ -43,7 +43,7 @@
                 </a>
             </button>
             <button type="button" class="btn btn-link" style="color: black">
-                <a data-bs-toggle="modal" data-bs-target="#createTopic" data-bs-whatever="createTopic">
+                <a data-bs-toggle="modal" data-bs-target="#sharelink" data-bs-whatever="sharelink">
                     <i style="font-size:24px" class="bi bi-link-45deg"></i><!--&#xF470; -->
                 </a>
             </button>
@@ -64,7 +64,11 @@
                             <g:form action="index" controller="documentResource">
                                 <div class="mb-3 d-flex ">
                                     <label for="recipient-name" class="col-form-label me-5">Document </label>
-                                    <input type="text" class="form-control" name="topicName" id="doc">
+%{--                                    <input type="text" class="form-control" name="topicName" id="doc">--}%
+                                    <g:form action="upload" method="POST" enctype="multipart/form-data">
+                                        <input type="file" name="file"/>
+%{--                                        <button type="submit">Browse</button>--}%
+                                    </g:form>
                                 </div>
                                 <div class="mb-3 d-flex">
                                     <label for="recipient-name" class="col-form-label me-5">Description </label>
@@ -79,18 +83,63 @@
                                         <option value="PRIVATE">Topic2</option>
                                     </select>
                                 </div>
+                                <g:form controller="documentResource" action="save">
                                 <div class="modal-footer">
-
-                                    <button type="submit" class="btn btn-primary">Save </button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                 </div>
+                                </g:form>
                             </g:form>
                         </div>
                     </div>
                 </div>
             </div>
 
-%{--            *************************************************--}%
+%{--            *******************************Share link ******************--}%
+
+            <div class="modal fade" id="sharelink" tabindex="-1" aria-labelledby="sharelink" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel2">Share Link</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <g:form action="index" controller="documentResource">
+                                <div class="mb-3 d-flex ">
+                                    <label for="recipient-name" class="col-form-label me-5">Link </label>
+                                    <input type="text" class="form-control" name="topicName" id="doc">
+%{--                                    <g:form action="upload" method="POST" enctype="multipart/form-data">--}%
+%{--                                        <input type="file" name="file"/>--}%
+%{--                                    --}%%{--                                        <button type="submit">Browse</button>--}%
+%{--                                    </g:form>--}%
+                                </div>
+                                <div class="mb-3 d-flex">
+                                    <label for="recipient-name" class="col-form-label me-5">Description </label>
+                                    <textarea id="description" name="description" rows="3" cols="30"></textarea>
+                                </div>
+                            %{-- <g:hiddenField name="createdBy" value="${session.currentUser}" />--}%
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <label for="message-text" class="col-form-label me-5">Topic:</label>
+                                    <select class="form-select rounded" name="visibilityEnum" aria-label="Default select example">
+                                        <option selected value="PUBLIC">Topic</option>
+                                        <option value="PRIVATE">Topic1</option>
+                                        <option value="PRIVATE">Topic2</option>
+                                    </select>
+                                </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                            </g:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            %{--            *************** *************************************************--}%
+
+
             <div class="modal fade" id="createTopic" tabindex="-1" aria-labelledby="createTopic" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -113,7 +162,6 @@
                                     </select>
                                 </div>
                                 <div class="modal-footer">
-
                                     <button type="submit" class="btn btn-primary">Save </button>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                 </div>
