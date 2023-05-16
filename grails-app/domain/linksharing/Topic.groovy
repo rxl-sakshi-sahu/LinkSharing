@@ -14,7 +14,7 @@ class Topic {
     static hasMany = [resources: Resource, subsciptions: Subscription]
     static belongsTo= [createdBy: User]
     static constraints = {
-        topicName(blank: false, unique: ['createdBy'])
+   //     topicName(blank: false, unique: ['createdBy'])
 //        dateCreated blank: false, date: true
 //        lastUpdated blank: false, date: true
       //  visibilityEnum enumType: 'string'

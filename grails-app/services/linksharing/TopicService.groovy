@@ -6,20 +6,19 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class TopicService {
 
-    int getTopicCount() {
-        def user = User.get(1)
-        def topicCount = Topic.countByCreatedBy(user)
-        return topicCount
+    List<Topic>getTopics(){
+        return Topic.list()
     }
+
     def serviceMethod() {
-            Topic topic = new Topic(topicName:params.get("topicName"), createdBy: user)
-        if(params.VisibilityEnum == 'Public'){
-            topic.VisibilityEnum = VisibilityEnum.PUBLIC
-        }
-        else {
-            topic.VisibilityEnum = VisibilityEnum.PRIVATE
-        }
-        topic.save(flush: true)
-        return true
+//            Topic topic = new Topic(topicName:params.get("topicName"), createdBy: user)
+//        if(params.VisibilityEnum == 'Public'){
+//            topic.VisibilityEnum = VisibilityEnum.PUBLIC
+//        }
+//        else {
+//            topic.VisibilityEnum = VisibilityEnum.PRIVATE
+//        }
+//        topic.save(flush: true)
+//        return true
     }
 }

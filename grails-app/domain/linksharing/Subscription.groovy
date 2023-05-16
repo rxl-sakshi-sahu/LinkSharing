@@ -7,6 +7,8 @@ class Subscription {
     SeriousnessEnum seriousness
     static belongsTo = [topic: Topic, user: User]
     static constraints = {
-
+        topic(unique: ['user'])
+        seriousness(nullable: false)
+        user(nullable: false)
     }
 }

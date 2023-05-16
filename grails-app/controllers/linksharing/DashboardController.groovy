@@ -1,15 +1,16 @@
 package linksharing
 
 class DashboardController {
-
+    def SubscriptionService
+    def TopicService
     def index() {
-//        User user = session.getAttribute("use")
-//        println "****************"
-//        println user.username
-////        if (!user) {
-////            redirect  (controller: "User" , action:"index")
-////            return
-//        render(view: "index", model: [user: user])
+        def topics = TopicService.getTopics()
+        def t= topics.size()
+
+        def noOfSubscriptions = SubscriptionService.getSub()
+        def s = noOfSubscriptions.size()
+
+        render(view: 'index', model:[topicCount:t, subCount:s,topics:topics])
     }
         }
 

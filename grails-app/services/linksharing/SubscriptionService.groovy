@@ -5,7 +5,11 @@ import enums.VisibilityEnum
 import grails.gorm.transactions.Transactional
 
 @Transactional
-class SubscribeService {
+class SubscriptionService {
+
+    List<Subscription>getSub(){
+        return Subscription.list()
+    }
 
     def serviceMethod() {
 //        User u = User.findByUsername(username)

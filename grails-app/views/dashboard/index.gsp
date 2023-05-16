@@ -21,13 +21,15 @@
 </head>
 
 <body>
-<g:render template="/templates/navbar"/>
-<div>
+%{--style="background-color:  #e6f3ff"--}%
+
+<g:render template="/templates/navbar" model="[topics:topics]"/>
 <g:if test="${flash.message}">
     <div class="alert alert-success">${flash.message}
     <button type="button" class="btn-close" aria-label="Close" style="display: inline-block; margin-left: 70%"></button>
+    </div>
 </g:if>
-</div>
+
 <div style="display: flex;">
 
     <!-- ************* Card ******************** -->
@@ -49,12 +51,12 @@
                                     <p>Subscriptions</p>
                                     <p style="margin-left: auto;">Topic</p>
                                 </div>
-                                <g:form controller="topic" action="topic">
+
+                                <g:form controller="dashboard" action="index">
                                 <div style="display: flex;">
                                     <!-- index.gsp -->
-
-                                    <a href="#" class="card-link">topic:${topicCount}</a>
-                                    <a href="#" class="card-link" style="margin-left: auto;">30</a>
+                                    <a href="#" class="card-link">${subCount}</a>
+                                    <a href="#" class="card-link" style="margin-left: auto;">${topicCount}</a>
                                     </g:form>
                                 </div>
                             </div>
@@ -68,7 +70,7 @@
                     <p>Subscriptions</p>
                     <a href="#" class="card-link" style="margin-left: auto;">View All</a>
                 </div>
-                <div class="card-body">
+                <div class="card-body" >
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-3">
@@ -88,7 +90,6 @@
 
                                     <!-- </div> -->
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -113,7 +114,6 @@
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus,
                                 numquam porro aliquam nulla error pariatur. Delectus, nihil corporis? Illum adipisci,
                             </div>
-
                         </div>
                     </div>
                     <hr>

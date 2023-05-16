@@ -31,6 +31,7 @@
             </g:form>
             <!-- <i style='font-size:24px' class='fas'>&#xf075;</i> -->
 %{--            <i style="font-size:24px" class="fa">&#xf0e0;</i>--}%
+<g:if test="${session.user}">
 
             <button type="button" class="btn btn-link" style="color: black">
                <a data-bs-toggle="modal" data-bs-target="#createTopic" data-bs-whatever="createTopic">
@@ -48,12 +49,13 @@
                 </a>
             </button>
             <button type="button" class="btn btn-link" style="color: black">
-                <a data-bs-toggle="modal" data-bs-target="#shareDoc" data-bs-whatever="shareDoc">
+                <a data-bs-toggle="modal" data-bs-target="#shareDocument" data-bs-whatever="shareDocument">
                     <i style='font-size:24px' class='fas'>&#xf044;</i>
                 </a>
             </button>
+</g:if>
 %{--            *********************************   shareDoc     **************--}%
-            <div class="modal fade" id="shareDoc" tabindex="-1" aria-labelledby="shareDoc" aria-hidden="true">
+            <div class="modal fade" id="shareDocument" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -61,39 +63,39 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <g:form action="index" controller="documentResource">
+                            <g:uploadForm controller="documentResource" action="save" >
                                 <div class="mb-3 d-flex ">
-                                    <label for="recipient-name" class="col-form-label me-5">Document </label>
-%{--                                    <input type="text" class="form-control" name="topicName" id="doc">--}%
-                                    <g:form action="upload" method="POST" enctype="multipart/form-data">
-                                        <input type="file" name="file"/>
-%{--                                        <button type="submit">Browse</button>--}%
-                                    </g:form>
+                                    <label for="recipient-name" class="col-form-label me-5">Document: </label>
+                                    <input type="file" class="form-control " name="filepath" id="recipient-name1">
                                 </div>
-                                <div class="mb-3 d-flex">
-                                    <label for="recipient-name" class="col-form-label me-5">Description </label>
-                                    <textarea id="description" name="description" rows="3" cols="30"></textarea>
+                                <div class="mb-3 d-flex ">
+                                    <label for="recipient-name" class="col-form-label me-5">Description: </label>
+                                    <input type="textarea" class="form-control" name="description" id="recipient-name">
                                 </div>
-                            %{-- <g:hiddenField name="createdBy" value="${session.currentUser}" />--}%
                                 <div class="mb-3 d-flex justify-content-between">
+%{--                                   // <g:hiddenField name="createdBy" value="${user.id}"/>--}%
                                     <label for="message-text" class="col-form-label me-5">Topic:</label>
-                                    <select class="form-select rounded" name="visibilityEnum" aria-label="Default select example">
-                                        <option selected value="PUBLIC">Topic</option>
-                                        <option value="PRIVATE">Topic1</option>
-                                        <option value="PRIVATE">Topic2</option>
+                                    <select class="form-select" name="topic" aria-label="Default select example">
+                                        <option selected>Topics</option>
+                                        <g:each var="topic" in="${topics}">
+                                            <option value="${topic.id}">${topic.topicName}</option>
+                                        </g:each>
                                     </select>
                                 </div>
-                                <g:form controller="documentResource" action="save">
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <g:actionSubmit class="btn btn-primary" value="submit" action="save">
+                                        Register
+                                    </g:actionSubmit>
+                                    %{-- <button type="button" class="btn btn-primary">Invite </button>--}%
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                 </div>
-                                </g:form>
-                            </g:form>
+                            </g:uploadForm>
                         </div>
+
                     </div>
                 </div>
             </div>
+
 
 %{--            *******************************Share link ******************--}%
 
@@ -105,39 +107,41 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <g:form action="index" controller="documentResource">
+                            <g:uploadForm action="save" controller="LinkResource">
                                 <div class="mb-3 d-flex ">
-                                    <label for="recipient-name" class="col-form-label me-5">Link </label>
-                                    <input type="text" class="form-control" name="topicName" id="doc">
+                                    <label for="sharelink" class="col-form-label me-5">Link </label>
+                                    <input type="text" class="form-control" name="url" id="sharelink">
 %{--                                    <g:form action="upload" method="POST" enctype="multipart/form-data">--}%
 %{--                                        <input type="file" name="file"/>--}%
 %{--                                    --}%%{--                                        <button type="submit">Browse</button>--}%
 %{--                                    </g:form>--}%
                                 </div>
                                 <div class="mb-3 d-flex">
-                                    <label for="recipient-name" class="col-form-label me-5">Description </label>
+                                    <label for="description" class="col-form-label me-5">Description </label>
                                     <textarea id="description" name="description" rows="3" cols="30"></textarea>
                                 </div>
                             %{-- <g:hiddenField name="createdBy" value="${session.currentUser}" />--}%
                                 <div class="mb-3 d-flex justify-content-between">
+                                    %{--                                   // <g:hiddenField name="createdBy" value="${user.id}"/>--}%
                                     <label for="message-text" class="col-form-label me-5">Topic:</label>
-                                    <select class="form-select rounded" name="visibilityEnum" aria-label="Default select example">
-                                        <option selected value="PUBLIC">Topic</option>
-                                        <option value="PRIVATE">Topic1</option>
-                                        <option value="PRIVATE">Topic2</option>
+                                    <select class="form-select" id="topic" name="topic" aria-label="Default select example">
+                                        <option selected>Topics</option>
+                                        <g:each var="t" in="${topics}">
+                                            <option value="${t.topicName}">${t.topicName}</option>
+                                        </g:each>
                                     </select>
                                 </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary">Save</button>
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                     </div>
-                            </g:form>
+                            </g:uploadForm>
                         </div>
                     </div>
                 </div>
             </div>
 
-            %{--            *************** *************************************************--}%
+            %{--            *************** Create Topic *************************************************--}%
 
 
             <div class="modal fade" id="createTopic" tabindex="-1" aria-labelledby="createTopic" aria-hidden="true">
@@ -148,7 +152,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <g:form action="index" controller="topic">
+                            <g:form  controller="topic" action="index">
                                 <div class="mb-3 d-flex ">
                                     <label for="recipient-name" class="col-form-label me-5">Topic: </label>
                                     <input type="text" class="form-control" name="topicName" id="topic">
@@ -179,9 +183,9 @@
                     <g:if test="${session.isAdmin == true}">
                     <g:link controller="adminUsers" action="index" class="dropdown-item">Users</g:link>
                     </g:if>
-                    <a class="dropdown-item" href="#">Topics</a>
+                    <g:link controller="topic" action="show" class="dropdown-item">Topics</g:link>
                     <a class="dropdown-item" href="#">Posts</a>
-                    <g:link controller="User" action="logout" class="dropdown-item">Logout</g:link>
+                    <g:link controller="login" action="logout" class="dropdown-item">Logout</g:link>
                 </div>
             </div>
         </div>

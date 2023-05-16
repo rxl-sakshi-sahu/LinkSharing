@@ -9,6 +9,7 @@ class Resource {
     static belongsTo = [topic: Topic]
     static hasMany = [readingItem:ReadingItem ,resourceRating:ResourceRating]
     static constraints = {
+       // description(blank: false)
     }
     static mapping = {
         table 'RESOURCE_TABLE'

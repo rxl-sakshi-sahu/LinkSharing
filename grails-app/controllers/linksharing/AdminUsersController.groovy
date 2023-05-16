@@ -10,33 +10,6 @@ class AdminUsersController {
         render(view:'index' , model: [users:users])
     }
 
-//    def activateUser(Long id) {
-//        def user = User.get(id)
-//        user.active = true
-//        user.save()
-//        flash.message = "User ${user.username} has been activated."
-//        redirect(action: "index")
-//    }
-//
-//    def activate(){
-//        User u= User.get(params.getElementById())
-//        User u1= User.findById(params.getElementById())
-//        u.username = u1.username
-//        u.email = u1.email
-//        u.firstName = u1.firstName
-//        u.lastName = u1.lastName
-//        u.active = true
-//        u.save(flush:true)
-//        render(view:'index')
-//    }
-//    def deactivateUser(Long id) {
-//        def user = User.get(id)
-//        user.active = false
-//        user.save()
-//        flash.message = "User ${user.username} has been deactivated."
-//        redirect(action: "index")
-//    }
-
     def updateStatus() {
         println params
         def user = User.get(params.id)

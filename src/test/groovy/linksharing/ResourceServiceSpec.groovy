@@ -3,7 +3,7 @@ package linksharing
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class SubscribeServiceSpec extends Specification implements ServiceUnitTest<SubscribeService>{
+class ResourceServiceSpec extends Specification implements ServiceUnitTest<ResourceService>{
 
     def setup() {
     }
