@@ -15,12 +15,13 @@ def TopicService
         def d = new LinkResource()
           d.url = params.url
         d.description = params.description
-        def t= Topic.findByTopicName(params.topicName)
+        def t= Topic.findByTopicName(params.topic)
+        print t
         d.topic = t
         d.createdBy = User.findByUsername(session.user)
-        print d.createdBy
         d.validate()
-        d.save(flush:true)
+        d.save(flush:true, failOnError:true)
+        flash.message="Link is shared successfully"
         redirect(controller: "dashboard", action: 'index')
     }
 }

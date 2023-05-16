@@ -4,10 +4,11 @@ import enums.SeriousnessEnum
 import enums.VisibilityEnum
 
 class TopicController {
-
+def TopicService
   def show()
   {
-    render(view:'show')
+    def topics = TopicService.getTopics()
+    render(view:'show', model: ['topics:topics'])
   }
     def index() {
       def username= session.user

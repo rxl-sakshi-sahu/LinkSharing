@@ -109,12 +109,9 @@
                         <div class="modal-body">
                             <g:uploadForm action="save" controller="LinkResource">
                                 <div class="mb-3 d-flex ">
-                                    <label for="sharelink" class="col-form-label me-5">Link </label>
-                                    <input type="text" class="form-control" name="url" id="sharelink">
-%{--                                    <g:form action="upload" method="POST" enctype="multipart/form-data">--}%
-%{--                                        <input type="file" name="file"/>--}%
-%{--                                    --}%%{--                                        <button type="submit">Browse</button>--}%
-%{--                                    </g:form>--}%
+                                    <label for="url" class="col-form-label me-5">Link </label>
+                                    <input type="text" class="form-control" name="url" id="url">
+
                                 </div>
                                 <div class="mb-3 d-flex">
                                     <label for="description" class="col-form-label me-5">Description </label>
@@ -123,7 +120,7 @@
                             %{-- <g:hiddenField name="createdBy" value="${session.currentUser}" />--}%
                                 <div class="mb-3 d-flex justify-content-between">
                                     %{--                                   // <g:hiddenField name="createdBy" value="${user.id}"/>--}%
-                                    <label for="message-text" class="col-form-label me-5">Topic:</label>
+                                    <label for="topic" class="col-form-label me-5">Topic:</label>
                                     <select class="form-select" id="topic" name="topic" aria-label="Default select example">
                                         <option selected>Topics</option>
                                         <g:each var="t" in="${topics}">

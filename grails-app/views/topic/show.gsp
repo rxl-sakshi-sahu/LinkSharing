@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<g:render template="/templates/navbar"/>
+<g:render template="/templates/navbar" model="[topics:topics]"/>
 <div style="display: flex;">
 
     <!-- ************* Card ******************** -->
@@ -27,7 +27,8 @@
     <div class="col-sm-4">
         <div class="card" style="width: 25rem; margin: 30px;">
             <div class="card-header">
-                <p>Topics: ${topicName}</p>
+                <p>Topics: </p>
+%{--                ${topics.topicName}--}%
             </div>
             <div class="card-body">
                 <div class="container">
