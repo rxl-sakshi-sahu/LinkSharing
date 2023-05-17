@@ -4,12 +4,27 @@ import enums.SeriousnessEnum
 import enums.VisibilityEnum
 
 class TopicController {
-def TopicService
+  def topicService
+  def subscriptionService
   def show()
   {
-    def topics = TopicService.getTopics()
-    render(view:'show', model: ['topics:topics'])
+    def topics = topicService.getTopics()
+    def t= topics.size()
+
+    def noOfSubscriptions = subscriptionService.getSub()
+    def s = noOfSubscriptions.size()
+
+    def resourceList = Resource.list()
+    def descriptionList = resourceList.collect { it.description }
+    render(view:'show', model: ['topics':topics, 'descriptionList':descriptionList, subCount:s,topicCount:t])
   }
+
+  def topicList()
+  {
+    def topics = topicService.getTopics()
+    render(view: 'topicList', model: ['topics':topics])
+  }
+
     def index() {
       def username= session.user
         def t = new Topic(params)

@@ -1,7 +1,7 @@
 package linksharing
 
 class DocumentResourceController {
-    def ResourceService
+    def resourceService
     def index(){
 //        def file = ResourceService.getfilePath()
 //        render(view:'index' , model: [users:users])

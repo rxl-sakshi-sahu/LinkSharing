@@ -1,10 +1,10 @@
 package linksharing
 
 class LinkResourceController {
-def TopicService
+def topicService
     def topicsList()
     {
-        def topics = TopicService.getTopics()
+        def topics = topicService.getTopics()
         render(view: 'index', model: [topics:topics])
     }
 

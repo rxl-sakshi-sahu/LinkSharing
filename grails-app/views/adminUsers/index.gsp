@@ -56,17 +56,6 @@
                         <td>${user.lastName}</td>
                         <td>${user.active}</td>
                         <td>
-%{--                            <script>--}%
-%{--                                function toggleText(link)--}%
-%{--                                {--}%
-%{--                                    // console.log((link.innerHTML === 'Activate'));--}%
-%{--                                    if (link.innerHTML === 'Activate') {--}%
-%{--                                        link.innerHTML = 'Deactivate';--}%
-%{--                                    } else {--}%
-%{--                                        link.innerHTML = 'Activate';--}%
-%{--                                    }--}%
-%{--                                }--}%
-%{--                            </script>--}%
                             <g:link controller="adminUsers" action="updateStatus" id="${user.id}" params="[user:user]">
                                     <g:if test="${user.active==true}">
                                         Deactivate

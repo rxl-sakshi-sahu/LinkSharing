@@ -26,7 +26,7 @@
 <g:render template="/templates/navbar" model="[topics:topics]"/>
 <g:if test="${flash.message}">
     <div class="alert alert-success">${flash.message}
-    <button type="button" class="btn-close" aria-label="Close" style="display: inline-block; margin-left: 70%"></button>
+        <button type="button" class="btn-close" aria-label="Close" style="display: inline-block; margin-left: 70%"></button>
     </div>
 </g:if>
 
@@ -35,108 +35,99 @@
     <!-- ************* Card ******************** -->
 
     <div class="row">
-        <div class="col-sm-4">
-            <div class="card" style="width: 25rem;  margin: 20px;">
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
+    <div class="col-sm-5">
+        <div class="card" style="width: 30rem;  margin: 20px;">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
+                        </div>
+                        <div class="col-8">
+                            <h4>Welcome, ${session.user}!</h4>
+                            %{--                                <p>Your email address is: ${session.user.email}</p>--}%
+                            <p style="margin-bottom: 0%;">@Uday</p>
+                            <div style="display: flex;">
+                                <p>Subscriptions</p>
+                                <p style="margin-left: auto;">Topic</p>
                             </div>
-                            <div class="col-8">
-                                <h4>Welcome, ${session.user}!</h4>
-%{--                                <p>Your email address is: ${session.user.email}</p>--}%
-                                <p style="margin-bottom: 0%;">@Uday</p>
-                                <div style="display: flex;">
-                                    <p>Subscriptions</p>
-                                    <p style="margin-left: auto;">Topic</p>
-                                </div>
 
-                                <g:form controller="dashboard" action="index">
+                            <g:form controller="dashboard" action="index">
                                 <div style="display: flex;">
-                                    <!-- index.gsp -->
                                     <a href="#" class="card-link">${subCount}</a>
-                                    <a href="#" class="card-link" style="margin-left: auto;">${topicCount}</a>
-                                    </g:form>
-                                </div>
-                            </div>
+                                <g:link controller="topic" action="topicList" class="card-link" style="margin-left: auto;">${topicCount}</g:link>
+                            </g:form>
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- /*******************************  Subscriptions ******************* -->
-            <div class="card" style="width: 25rem; margin: 30px;">
-                <div class="card-header" style="display: flex;">
-                    <p>Subscriptions</p>
-                    <a href="#" class="card-link" style="margin-left: auto;">View All</a>
-                </div>
-                <div class="card-body" >
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
-                            </div>
-                            <div class="col-8">
-                                <div class="col"><a href="#" class="card-link">Grails</a></div>
-                                <!-- <div style="display: flex;"> -->
-                                <div class="row">
-                                    <div class="col">@Uday</div>
-                                    <div class="col">Subscriptions</div>
-                                    <div class="col">Posts</div>
-                                    <div class="w-100"></div>
-                                    <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
-                                    <div class="col"><a href="#" class="card-link">50</a></div>
-                                    <div class="col"><a href="#" class="card-link">30</a></div>
-
-                                    <!-- </div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- /*******************************  Subscriptions end ******************* -->
         </div>
-        <div class="col-sm-8">
-            <div class="card" style="width: 48rem; margin: 20px;">
-                <div class="card-header" style="display: flex;">
-                    <p>Inbox</p>
-                    <a href="#" class="card-link" style="margin-left: auto;">View All</a>
+        <!-- /*******************************  Subscriptions ******************* -->
+        <div class="card" style="width: 30rem; margin: 20px;">
+        <div class="card-header" style="display: flex;">
+            <p>Subscriptions</p>
+            <a href="#" class="card-link" style="margin-left: auto;">View All</a>
+        </div>
+        <div class="card-body" >
+            <div class="container">
+                <div class="row" >
+                    <div class="col-sm-3">
+                        <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
+                    </div>
+                    %{--                            <div class="row">--}%
+                    %{--                                <div class="col-8">col-8</div>--}%
+                    %{--                                <div class="col-4">col-4</div>--}%
+                    %{--                            </div>--}%
+                    <div class="col-sm-9" >
+                    <g:link controller="topic" action="show" class="card-link" style="margin-left: auto;">Grails</g:link>
+                    <div class="row">
+                    <p class="col">@Uday</p>
+                    <p class="col">Subscriptions</p>
+                    <p class="col">Posts</p>
+                    <div class="w-100"></div>
+                    <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
+                    <div class="col"><a href="#" class="card-link">50</a></div>
+                    <div class="col"><a href="#" class="card-link">30</a></div>
+                    </div>
+                    <!-- </div> -->
                 </div>
-                <div class="card-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- /*******************************  Subscriptions end ******************* -->
+</div>
+    <div class="col-sm-6">
+        <div class="card" style="width: 45rem; margin: 10px;">
+            <div class="card-header" style="display: flex;">
+                <p>Inbox</p>
+                <a href="#" class="card-link" style="margin-left: auto;">View All</a>
+            </div>
+            <div class="card-body">
+                <g:each  var="des" in="${descriptionList}">
+
                     <div class="container">
                         <div class="row">
                             <div class="col-4">
                                 <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
                             </div>
                             <div class="col-8">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus,
-                                numquam porro aliquam nulla error pariatur. Delectus, nihil corporis? Illum adipisci,
+                                <p> ${des}</p>
                             </div>
                         </div>
                     </div>
                     <hr>
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-4">
-                                    <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
-                                </div>
-                                <div class="col-8">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus,
-                                    numquam porro aliquam nulla error pariatur. Delectus, nihil corporis? Illum adipisci,
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </g:each>
             </div>
         </div>
     </div>
 </div>
+</div>
 
-<div class="card" style="width: 25rem; padding: 0px; margin: 30px;">
+<div class="card" style="width: 30rem; padding: 0px; margin: 20px;">
     <div class="card-header" style="display: flex;">
         <p>Trending Topics</p>
         <a href="#" class="card-link" style="margin-left: auto;">View All</a>
@@ -146,22 +137,22 @@
             <div class="row">
                 <div class="col-sm-3">
                     <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
-%{--                    <img src="assets/images/user.png" alt="user" class="image">--}%
+                    %{--                    <img src="assets/images/user.png" alt="user" class="image">--}%
                 </div>
                 <div class="col-8">
                     <h4>Trending Topics</h4>
                     <!-- <div style="display: flex;"> -->
                     <div class="row">
-                        <div class="col">@Uday</div>
-                        <div class="col">Subscriptions</div>
-                        <div class="col">Posts</div>
-                        <div class="w-100"></div>
-                        <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
-                        <div class="col"><a href="#" class="card-link">50</a></div>
-                        <div class="col"><a href="#" class="card-link">30</a></div>
+                    <div class="col">@Uday</div>
+                    <div class="col">Subscriptions</div>
+                    <div class="col">Posts</div>
+                    <div class="w-100"></div>
+                    <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
+                    <div class="col"><a href="#" class="card-link">50</a></div>
+                    <div class="col"><a href="#" class="card-link">30</a></div>
 
-                        <!-- </div> -->
-                    </div>
+                    <!-- </div> -->
+                </div>
 
                 </div>
             </div>

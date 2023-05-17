@@ -24,11 +24,11 @@
     <!-- ************* Card ******************** -->
 
     <div class="row">
-    <div class="col-sm-4">
-        <div class="card" style="width: 25rem; margin: 30px;">
+    <div class="col-sm-5">
+        <div class="card" style="width: 30rem; margin: 20px;">
             <div class="card-header">
-                <p>Topics: </p>
-%{--                ${topics.topicName}--}%
+                <p>Topics: "Grails" </p>
+                %{--                ${topics.topicName}--}%
             </div>
             <div class="card-body">
                 <div class="container">
@@ -45,7 +45,8 @@
                             <div class="col">Posts</div>
                             <div class="w-100"></div>
                             <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
-                            <div class="col"><a href="#" class="card-link">50</a></div>
+                            <div class="col"><a href="#" class="card-link">${subCount}</a></div>
+%{--                            <a href="#" class="col">${subCount}</a>--}%
                             <div class="col"><a href="#" class="card-link">30</a></div>
 
                             <!-- </div> -->
@@ -57,7 +58,7 @@
             </div>
         </div>
         <!-- /*******************************  Subscriptions ******************* -->
-        <div class="card" style="width: 25rem;  margin: 30px;">
+        <div class="card" style="width: 30rem;  margin: 20px;">
         <div class="card-header" style="display: flex;">
             <p>Users: "Grails"</p>
             <a href="#" class="card-link" style="margin-left: auto;">View All</a>
@@ -73,11 +74,12 @@
                         <!-- <div style="display: flex;"> -->
                         <div class="row">
                         <div class="col">Subscriptions</div>
-                        <div class="col">Topics</div>
+                        <div class="col" style="margin-left: 90px">Topics</div>
                         <div class="w-100"></div>
-                        <div class="col"><a href="#" class="card-link">50</a></div>
-                        <div class="col"><a href="#" class="card-link">30</a></div>
-
+                        <div style="display: flex;">
+                        <a href="#" class="card-link">${subCount}</a>
+                        <g:link controller="topic" action="topicList" class="card-link" style="margin-left: auto;">${topicCount}</g:link>
+                        </div>
                         <!-- </div> -->
                     </div>
 
@@ -90,8 +92,8 @@
         <!-- /*******************************  Subscriptions end ******************* -->
     </div>
     <!-- ###################333 -->
-    <div class="col-sm-8">
-        <div class="card" style="width: 48rem; margin: 20px;">
+    <div class="col-sm-7">
+        <div class="card" style="width: 45rem; margin: 20px;">
             <div class="card-header" style="display: flex;">
                 <p>Post: "Grails"</p>
                 <div class="dropdown" style="margin-left:auto;">
@@ -106,36 +108,24 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-4">
-                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
-                        </div>
-                        <div class="col-8">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus,
-                            numquam porro aliquam nulla error pariatur. Delectus, nihil corporis? Illum adipisci,
-                        </div>
-
-                    </div>
-                </div>
-                <hr>
+            <g:form controller="topic" action="show">
                 <div class="card-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-4">
-                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
+                    <g:each  var="des" in="${descriptionList}">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
+                                </div>
+                                <div class="col-8">
+                                    <p>${des}</p>
+                                </div>
                             </div>
-                            <div class="col-8">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus,
-                                numquam porro aliquam nulla error pariatur. Delectus, nihil corporis? Illum adipisci,
-                            </div>
-
-                            <hr>
                         </div>
-                    </div>
+                        <hr>
+                    </g:each>
+
                 </div>
-            </div>
+            </g:form>
         </div>
     </div>
 </div>

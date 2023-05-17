@@ -1,16 +1,22 @@
 package linksharing
 
-class DashboardController {
-    def SubscriptionService
-    def TopicService
+class DashboardController
+{
+    def subscriptionService
+    def topicService
     def index() {
-        def topics = TopicService.getTopics()
+        def topics = topicService.getTopics()
         def t= topics.size()
 
-        def noOfSubscriptions = SubscriptionService.getSub()
+        def resourceList = Resource.list()
+        def descriptionList = resourceList.collect { it.description }
+
+        def noOfSubscriptions = subscriptionService.getSub()
         def s = noOfSubscriptions.size()
 
-        render(view: 'index', model:[topicCount:t, subCount:s,topics:topics])
+        render(view: 'index', model:[topicCount:t, subCount:s,topics:topics, 'descriptionList':descriptionList])
     }
-        }
+
+
+}
 

@@ -180,7 +180,7 @@
                     <g:if test="${session.isAdmin == true}">
                     <g:link controller="adminUsers" action="index" class="dropdown-item">Users</g:link>
                     </g:if>
-                    <g:link controller="topic" action="show" class="dropdown-item">Topics</g:link>
+                    <g:link controller="topic" action="topicList" class="dropdown-item">Topics</g:link>
                     <a class="dropdown-item" href="#">Posts</a>
                     <g:link controller="login" action="logout" class="dropdown-item">Logout</g:link>
                 </div>
