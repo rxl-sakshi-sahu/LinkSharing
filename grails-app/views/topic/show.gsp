@@ -27,8 +27,7 @@
     <div class="col-sm-5">
         <div class="card" style="width: 30rem; margin: 20px;">
             <div class="card-header">
-                <p>Topics: "Grails" </p>
-                %{--                ${topics.topicName}--}%
+                <p>Topics: ${params.topicName} </p>
             </div>
             <div class="card-body">
                 <div class="container">
@@ -60,7 +59,7 @@
         <!-- /*******************************  Subscriptions ******************* -->
         <div class="card" style="width: 30rem;  margin: 20px;">
         <div class="card-header" style="display: flex;">
-            <p>Users: "Grails"</p>
+            <p>Users: ${params.topicName} </p>
             <a href="#" class="card-link" style="margin-left: auto;">View All</a>
         </div>
         <div class="card-body">
@@ -95,7 +94,7 @@
     <div class="col-sm-7">
         <div class="card" style="width: 45rem; margin: 20px;">
             <div class="card-header" style="display: flex;">
-                <p>Post: "Grails"</p>
+                <p>Post: ${params.topicName} </p>
                 <div class="dropdown" style="margin-left:auto;">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">

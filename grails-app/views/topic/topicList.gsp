@@ -45,8 +45,7 @@
         <g:each in="${topics}" var="t">
             <tr>
                 <td>${t.id}</td>
-                <td><g:link controller="topic" action="show" class="card-link">${t.topicName}</g:link></td>
-%{--                <td>${t.topicName}</td>--}%
+                <td><g:link controller="topic" action="show" params="[topicName : t.topicName]">${t.topicName}</g:link></td>
                 <td>${t.createdBy.username}</td>
             </tr>
         </g:each>
