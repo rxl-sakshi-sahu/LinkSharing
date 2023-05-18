@@ -1,25 +1,19 @@
 package linksharing
 
 class EditProfileController {
-
+    def topicService
     def index() {
-        render( view: 'index')
+        def topicList = topicService.getUserTopics(session.user)
+        println "***********"
+        print topicList
+        render (view: 'index', model: ['topicList':topicList])
     }
+
    def editProfile() {
-//        def username= session.user
-//
-//        //def user = User.findByUsername(session.username)
-//
-//        if (!username) {
-//            flash.message="error occured"
-//            redirect(controller: 'editProfile', action: 'index')
-//            return
-//        }
-//        render(view: 'index', model: [username:username])
-       render (view: 'index')
+
     }
+
     def saveProfile() {
-        //render('hi')
         def user = User.findByUsername(session.user)
 //        if (!user) {
 //            flash.message="Info not updated"
@@ -40,5 +34,20 @@ class EditProfileController {
             redirect(action: 'index')
         }
         render("updated")
+    }
+
+    def changePassword() {
+        def user = User.findByUsername(session.user)
+
+        def newPassword = params.password
+        def confirmPassword = params.confirmPassword
+
+        if (newPassword != confirmPassword) {
+            return
+        }
+        user.password = newPassword
+        user.save(flush: true, flashOnError: true)
+        flash.message="Password changed successfully"
+        redirect(controller: 'editProfile' ,action: 'index')
     }
 }

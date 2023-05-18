@@ -6,6 +6,7 @@ class UserController {
         render(view: 'index')
     }
 
+
     def RegisterUser() {
         //println params
         def user = new User()

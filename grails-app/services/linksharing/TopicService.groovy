@@ -10,15 +10,29 @@ class TopicService {
         return Topic.list()
     }
 
+    List<Topic>getUserTopics(String username)
+    {
+        def user = User.findByUsername(username)
+        def userTopics = Topic.findAllByCreatedBy(user)
+        return userTopics
+    }
+
+    List<Topic>topicListByRole(String username)
+    {
+        def user= User.findByUsername(username)
+        def getListByRole
+        if(user.admin == true)
+        {
+             getListByRole = Topic.list()
+        }
+        else
+        {
+             getListByRole = Topic.findAllByVisibilityEnum('PUBLIC' as VisibilityEnum)
+        }
+        return getListByRole
+    }
+
     def serviceMethod() {
-//            Topic topic = new Topic(topicName:params.get("topicName"), createdBy: user)
-//        if(params.VisibilityEnum == 'Public'){
-//            topic.VisibilityEnum = VisibilityEnum.PUBLIC
-//        }
-//        else {
-//            topic.VisibilityEnum = VisibilityEnum.PRIVATE
-//        }
-//        topic.save(flush: true)
-//        return true
+
     }
 }

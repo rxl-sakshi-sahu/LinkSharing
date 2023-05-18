@@ -32,7 +32,71 @@
     <button type="button" class="btn-close" aria-label="Close" style="display: inline-block; margin-left: 70%"></button>
 </g:if>
 </div>
-<div class="col-sm-5" style="padding-right :5px;">
+<div class="row">
+    <div class="col-sm-5">
+        <div class="card" style="width: 30rem;  margin: 20px;">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
+                        </div>
+                        <div class="col-8">
+                            <h4>Welcome, ${session.user}!</h4>
+                            %{--                                <p>Your email address is: ${session.user.email}</p>--}%
+                            <p style="margin-bottom: 0%;">@Uday</p>
+                            <div style="display: flex;">
+                                <p>Subscriptions</p>
+                                <p style="margin-left: auto;">Topic</p>
+                            </div>
+
+                            <g:form controller="dashboard" action="index">
+                                <div style="display: flex;">
+                                    <a href="#" class="card-link">${subCount}</a>
+                                <g:link controller="topic" action="topicList" class="card-link" style="margin-left: auto;">${topicCount}</g:link>
+                            </g:form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="width: 30rem; padding: 0px; margin: 20px;">
+            <div class="card-header" style="display: flex;">
+                <p>Topics</p>
+                <a href="#" class="card-link" style="margin-left: auto;">View All</a>
+            </div>
+            <g:each in="${topicList}" var="t">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
+                            %{--                    <img src="assets/images/user.png" alt="user" class="image">--}%
+                        </div>
+                        <div class="col-8">
+
+                                    <p>${t.topicName}</p>
+
+                            <div class="row">
+                                <div class="col">@Uday</div>
+                                <div class="col">Subscriptions</div>
+                                <div class="col">Posts</div>
+                                <div class="w-100"></div>
+                                <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
+                                <div class="col"><a href="#" class="card-link">50</a></div>
+                                <div class="col"><a href="#" class="card-link">30</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </g:each>
+        </div>
+    </div>
+
+<div class="col-sm-6">
 
 <g:form controller='editProfile' action='saveProfile'>
     <div class="card" style="width: 30rem; margin: 30px;">
@@ -65,7 +129,7 @@
 </g:form>
     <!--*******************************Profile end **********************-->
     <!--*********************  Change Password ********************************-->
-    <g:form controller="editProfile" action="saveProfile">
+    <g:form controller="editProfile" action="changePassword">
     <div class="card" style="width: 30rem; margin: 30px;">
         <div class="card-header">
             <h4 style="text-align: center;"><strong>Change Password</strong></h4>
@@ -89,11 +153,19 @@
 
         </div>
     </div>
-    <!-- <button type="button" class="btn btn-primary"  style="padding-left: 2.5rem; padding-right: 2.5rem;">Primary</button> -->
+    </g:form>
 </div>
+
 <!--*********************  Change Password end ********************************-->
 
-</g:form>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

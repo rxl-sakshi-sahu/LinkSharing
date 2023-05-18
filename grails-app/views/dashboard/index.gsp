@@ -23,10 +23,11 @@
 <body>
 %{--style="background-color:  #e6f3ff"--}%
 
-<g:render template="/templates/navbar" model="[topics:topics]"/>
+<g:render template="/templates/navbar" model="[topics: topics]"/>
 <g:if test="${flash.message}">
     <div class="alert alert-success">${flash.message}
-        <button type="button" class="btn-close" aria-label="Close" style="display: inline-block; margin-left: 70%"></button>
+        <button type="button" class="btn-close" aria-label="Close"
+                style="display: inline-block; margin-left: 70%"></button>
     </div>
 </g:if>
 
@@ -41,21 +42,26 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-3">
-                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
+                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
+                                 style="height: 65px; width: 60px">
                         </div>
+
                         <div class="col-8">
                             <h4>Welcome, ${session.user}!</h4>
                             %{--                                <p>Your email address is: ${session.user.email}</p>--}%
                             <p style="margin-bottom: 0%;">@Uday</p>
+
                             <div style="display: flex;">
                                 <p>Subscriptions</p>
+
                                 <p style="margin-left: auto;">Topic</p>
                             </div>
 
                             <g:form controller="dashboard" action="index">
                                 <div style="display: flex;">
-                                    <a href="#" class="card-link">${subCount}</a>
-                                <g:link controller="topic" action="topicList" class="card-link" style="margin-left: auto;">${topicCount}</g:link>
+                                        <a href="#" class="card-link">${subCount}</a>
+                                <g:link controller="topic" action="topicList" class="card-link"
+                                        style="margin-left: auto;">${topicCount}</g:link>
                             </g:form>
                         </div>
                         </div>
@@ -69,18 +75,18 @@
             <p>Subscriptions</p>
             <a href="#" class="card-link" style="margin-left: auto;">View All</a>
         </div>
-        <div class="card-body" >
+
+        <div class="card-body">
             <div class="container">
-                <div class="row" >
+                <div class="row">
                     <div class="col-sm-3">
-                        <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
+                        <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
+                             style="height: 65px; width: 60px">
                     </div>
-                    %{--                            <div class="row">--}%
-                    %{--                                <div class="col-8">col-8</div>--}%
-                    %{--                                <div class="col-4">col-4</div>--}%
-                    %{--                            </div>--}%
-                    <div class="col-sm-9" >
-                    <g:link controller="topic" action="show" class="card-link" style="margin-left: auto;">Grails</g:link>
+
+                    <div class="col-sm-9">
+                    <g:link controller="topic" action="show" class="card-link"
+                            style="margin-left: auto;">Grails</g:link>
                     <div class="row">
                     <p class="col">@Uday</p>
                     <p class="col">Subscriptions</p>
@@ -89,33 +95,73 @@
                     <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
                     <div class="col"><a href="#" class="card-link">50</a></div>
                     <div class="col"><a href="#" class="card-link">30</a></div>
-                    </div>
-                    <!-- </div> -->
+                </div>
                 </div>
                 </div>
             </div>
         </div>
     </div>
+
+        %{--        *****************************  Trending Topics ****************************--}%
+        <div class="card" style="width: 30rem; padding: 0px; margin: 20px;">
+        <div class="card-header" style="display: flex;">
+            <p>Trending Topics</p>
+            <a href="#" class="card-link" style="margin-left: auto;">View All</a>
+        </div>
+        <%def count = 5%>
+        <g:each var="topics" in="${trendingTopics}" status="loopStatus">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
+                                 style="height: 65px; width: 60px">
+                        </div>
+
+                        <div class="col-8">
+                            <g:if test="${count>0}">
+                                <%count-- %>
+                                <h4>${topics[0].topicName}</h4>
+                            </g:if>
+                            <div class="row">
+                                <div class="col">@Uday</div>
+                                <div class="col">Subscriptions</div>
+                                <div class="col">Posts</div>
+                                <div class="w-100"></div>
+                                <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
+                                <div class="col"><a href="#" class="card-link">50</a></div>
+                                <div class="col"><a href="#" class="card-link">30</a></div>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </g:each>
     </div>
 
-    <!-- /*******************************  Subscriptions end ******************* -->
-</div>
+
+        <!-- /*******************************  Subscriptions end ******************* -->
+    </div>
+
     <div class="col-sm-6">
         <div class="card" style="width: 45rem; margin: 10px;">
             <div class="card-header" style="display: flex;">
                 <p>Inbox</p>
                 <a href="#" class="card-link" style="margin-left: auto;">View All</a>
             </div>
-            <div class="card-body">
-                <g:each  var="des" in="${descriptionList}">
 
+            <div class="card-body">
+                <g:each var="des" in="${descriptionList}">
                     <div class="container">
                         <div class="row">
                             <div class="col-4">
-                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
+                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
+                                     style="height: 65px; width: 60px">
                             </div>
+
                             <div class="col-8">
-                                <p> ${des}</p>
+                                <p>${des}</p>
                             </div>
                         </div>
                     </div>
@@ -127,45 +173,18 @@
 </div>
 </div>
 
-<div class="card" style="width: 30rem; padding: 0px; margin: 20px;">
-    <div class="card-header" style="display: flex;">
-        <p>Trending Topics</p>
-        <a href="#" class="card-link" style="margin-left: auto;">View All</a>
-    </div>
-    <div class="card-body">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
-                    %{--                    <img src="assets/images/user.png" alt="user" class="image">--}%
-                </div>
-                <div class="col-8">
-                    <h4>Trending Topics</h4>
-                    <!-- <div style="display: flex;"> -->
-                    <div class="row">
-                    <div class="col">@Uday</div>
-                    <div class="col">Subscriptions</div>
-                    <div class="col">Posts</div>
-                    <div class="w-100"></div>
-                    <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
-                    <div class="col"><a href="#" class="card-link">50</a></div>
-                    <div class="col"><a href="#" class="card-link">30</a></div>
-
-                    <!-- </div> -->
-                </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<br>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

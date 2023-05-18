@@ -44,9 +44,9 @@
                             <div class="col">Posts</div>
                             <div class="w-100"></div>
                             <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
-                            <div class="col"><a href="#" class="card-link">${subCount}</a></div>
-%{--                            <a href="#" class="col">${subCount}</a>--}%
-                            <div class="col"><a href="#" class="card-link">30</a></div>
+                            <div class="col"><a href="#" class="card-link">${subscriptions.topic.id.size()}</a></div>
+                            %{--                            <a href="#" class="col">${subCount}</a>--}%
+                            <div class="col"><a href="#" class="card-link">${descriptionListSize}</a></div>
 
                             <!-- </div> -->
                         </div>
@@ -62,6 +62,8 @@
             <p>Users: ${params.topicName} </p>
             <a href="#" class="card-link" style="margin-left: auto;">View All</a>
         </div>
+        <g:each  var="des" in="${subscriptions.user}">
+%{--            {subscriptions.topic.createdBy.username}--}%
         <div class="card-body">
             <div class="container">
                 <div class="row">
@@ -69,23 +71,23 @@
                         <img src="${resource(dir: 'images', file: 'user.png')}" alt="user" style="height: 65px; width: 60px">
                     </div>
                     <div class="col-8">
-                        <div class="col"><a href="#" class="card-link">Grails</a></div>
-                        <!-- <div style="display: flex;"> -->
+                            <h4>${des.username}</h4>
                         <div class="row">
                         <div class="col">Subscriptions</div>
                         <div class="col" style="margin-left: 90px">Topics</div>
                         <div class="w-100"></div>
                         <div style="display: flex;">
-                        <a href="#" class="card-link">${subCount}</a>
-                        <g:link controller="topic" action="topicList" class="card-link" style="margin-left: auto;">${topicCount}</g:link>
+%{--                            ***************************************--}%
+                            <a href="#" class="card-link">${des.subscription.size()}</a>
+                            <a href="#" class="card-link" style="margin-left: 200px">${des.topic.size()}</a>
+%{--                            <p>${des.topic.size()}</p>--}%
                         </div>
-                        <!-- </div> -->
                     </div>
-
                     </div>
                 </div>
             </div>
         </div>
+        </g:each>
     </div>
 
         <!-- /*******************************  Subscriptions end ******************* -->
@@ -122,7 +124,6 @@
                         </div>
                         <hr>
                     </g:each>
-
                 </div>
             </g:form>
         </div>
