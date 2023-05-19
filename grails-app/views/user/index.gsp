@@ -23,21 +23,38 @@
 %{--style="background-color:  #ccccff"--}%
 <g:render template="/templates/navbar"/>
 
-<g:if test="${flash.message}" controller="login" action="auth">
-    <div class="alert alert-success">${flash.message}
-        <button type="button" class="btn-close" aria-label="Close"
+%{--<g:if test="${flash.message}">--}%
+%{--    <div class="alert alert-success">${flash.message}--}%
+%{--    <button type="button" class="btn-close" aria-label="Close"--}%
+%{--            style="display: inline-block; margin-left: 70%"></button>--}%
+%{--</g:if>--}%
+
+<g:if test="${flash.message}">
+    <div class="alert alert-success" onclick="showError()" id="error-alert">${flash.message}
+        <button type="button" class="btn-close" data-dismiss='alert' aria-label="Close"
                 style="display: inline-block; margin-left: 70%"></button>
     </div>
 </g:if>
+
 <g:if test="${flash.error}">
-    <div class="alert alert-danger">${flash.error}
-        <button type="button" class="btn-close" aria-label="Close"
-                style="display: inline-block; margin-left: 70%"></button>
-    </div>
+<div class="alert alert-danger" onclick="showError()" id="error-alert">${flash.error}
+    <button type="button" class="btn-close" data-dismiss='alert' aria-label="Close"
+            style="display: inline-block; margin-left: 70%"></button>
+</div>
 </g:if>
+
+<script>
+function showError(){
+    document.getElementById('error-alert').removeAttribute('style')
+    $('#error-alert').fadeTo(2000,500).slideUp(500, function(){
+$('#error-alert').slideUp(500);
+});
+}
+</script>
+
+
 <div class="row">
     <div class="col-sm-7">
-
         <!-- /**************** div ************************* -->
         <div class="card" style="width: 35rem; margin: 30px; ">
             <div class="card-header">
@@ -197,11 +214,9 @@
             <!--   Login details-->
                 <g:form controller='Login' action='auth'>
                     <div class="form-outline mb-sm-0">
-                        <input type="email" id="mail" name="email" class="form-control" required/>
+                        <input type="text" id="mail" name="email" class="form-control" required/>
                         <label class="form-label" for="email">Username / Email address</label>
                     </div>
-                    <!-- Password input -->
-                %{--                <input type="text" id="username" name="username" required>--}%
                     <div class="form-outline" style="padding-bottom: 0%;">
                         <input type="password" id="passwd" name="password" class="form-control" minlength="3" required/>
                         <label class="form-label" for="password">Password</label>
@@ -274,10 +289,16 @@
     </div>
 </div>
 
-<!-- Option 1: Bootstrap Bundle with Popper -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

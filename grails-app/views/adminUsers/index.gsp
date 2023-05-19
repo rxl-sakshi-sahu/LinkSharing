@@ -30,9 +30,27 @@
 <g:render template="/templates/navbar"/>
 <div>
     <g:if test="${flash.message}">
-        <div class="alert alert-success">${flash.message}
-        <button type="button" class="btn-close" aria-label="Close" style="display: inline-block; margin-left: 70%"></button>
+        <div class="alert alert-success" onclick="showError()" id="error-alert">${flash.message}
+            <button type="button" class="btn-close" data-dismiss='alert' aria-label="Close"
+                    style="display: inline-block; margin-left: 70%"></button>
+        </div>
+        [</g:if>
+
+    <g:if test="${flash.error}">
+        <div class="alert alert-danger" onclick="showError()" id="error-alert">${flash.error}
+            <button type="button" class="btn-close" data-dismiss='alert' aria-label="Close"
+                    style="display: inline-block; margin-left: 70%"></button>
+        </div>
     </g:if>
+
+    <script>
+        function showError(){
+            document.getElementById('error-alert').removeAttribute('style')
+            $('#error-alert').fadeTo(2000,500).slideUp(500, function(){
+                $('#error-alert').slideUp(500);
+            });
+        }
+    </script>
 </div>
         <table class="table">
             <thead>

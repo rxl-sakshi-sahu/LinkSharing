@@ -13,7 +13,6 @@ class DashboardService {
                 groupProperty("topic")
                 count("topic", 'mycount')
             }
-            println "***sdvfs*"
             order('mycount', 'desc')
         }
         return c
