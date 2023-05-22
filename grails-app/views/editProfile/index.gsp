@@ -27,7 +27,7 @@
 <body>
 
 <g:render template="/templates/navbar"/>
-
+<div>
 <g:if test="${flash.message}">
     <div class="alert alert-success" onclick="showError()" id="error-alert">${flash.message}
         <button type="button" class="btn-close" data-dismiss='alert' aria-label="Close"
@@ -63,7 +63,7 @@
                         <div class="col-8">
                             <h4>Welcome, ${session.user}!</h4>
                             %{--                                <p>Your email address is: ${session.user.email}</p>--}%
-                            <p style="margin-bottom: 0%;">@Uday</p>
+                            <p style="margin-bottom: 0%;">@${session.user}</p>
                             <div style="display: flex;">
                                 <p>Subscriptions</p>
                                 <p style="margin-left: auto;">Topic</p>
@@ -71,7 +71,7 @@
 
                             <g:form controller="dashboard" action="index">
                                 <div style="display: flex;">
-                                    <a href="#" class="card-link">${subCount}</a>
+                                    <a href="#" class="card-link">${topicCount}</a>
                                 <g:link controller="topic" action="topicList" class="card-link" style="margin-left: auto;">${topicCount}</g:link>
                             </g:form>
                         </div>
@@ -155,15 +155,15 @@
                 </div>
                 <div class="card-body" style="padding-bottom: 0%;">
                     <div class="form-group row">
-                        <label for="inputPassword3" class="col-sm-5 col-form-label">Password</label>
+                        <label for="password" class="col-sm-5 col-form-label">Password*</label>
                         <div class="col-sm-6">
-                            <input type="password" class="form-control" id="password" placeholder="Password">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputPassword3" class="col-sm-5 col-form-label">Confirm Password*</label>
                         <div class="col-sm-6">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                            <input type="password" class="form-control" name="confirmPassword" id="inputPassword3" placeholder="Password" required>
                         </div>
                     </div>
                     <div style="padding-left: 70%; padding-top: 0%; padding-bottom: 2%;">

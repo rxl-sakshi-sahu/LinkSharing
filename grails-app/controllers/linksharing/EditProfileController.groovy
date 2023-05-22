@@ -3,13 +3,14 @@ package linksharing
 class EditProfileController {
     def topicService
     def index() {
+        def user= User.findByUsername(session.user)
+        def topics = topicService.getTopics()
+        //print topics
+        def t= topics.findAll{ topic -> topic.createdBy==user}
+        def topicCount = t.size()
+
         def topicList = topicService.getUserTopics(session.user)
-        print topicList
-        render (view: 'index', model: ['topicList':topicList])
-    }
-
-   def editProfile() {
-
+        render (view: 'index', model: ['topicList':topicList, 'topicCount':topicCount])
     }
 
     def saveProfile() {
@@ -35,12 +36,15 @@ class EditProfileController {
         def user = User.findByUsername(session.user)
         def newPassword = params.password
         def confirmPassword = params.confirmPassword
-        if (newPassword != confirmPassword) {
-            return
+        if(newPassword != confirmPassword){
+            flash.error= "Password do not match"
+            redirect(controller: 'editProfile' ,action: 'index')
         }
-        user.password = newPassword
-        user.save(flush: true, flashOnError: true)
-        flash.message="Password updated successfully"
-        redirect(controller: 'editProfile' ,action: 'index')
+        else {
+            user.password = newPassword
+            user.save(flush: true, flashOnError: true)
+            flash.message = "Password updated successfully"
+            redirect(controller: 'editProfile', action: 'index')
+        }
     }
 }

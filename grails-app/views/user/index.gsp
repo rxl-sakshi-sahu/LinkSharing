@@ -58,7 +58,7 @@ $('#error-alert').slideUp(500);
         <!-- /**************** div ************************* -->
         <div class="card" style="width: 35rem; margin: 30px; ">
             <div class="card-header">
-                <p>Recent Searches</p>
+                <p>Recent Shares</p>
             </div>
 
             <div class="card-body" style="padding-bottom: 0%;">
@@ -131,7 +131,7 @@ $('#error-alert').slideUp(500);
 
         <div class="card" style="width: 35rem; margin: 30px;">
             <div class="card-header">
-                <p>Recent Searches</p>
+                <p>Top Posts</p>
             </div>
 
             <div class="card-body" style="padding-bottom: 0%;">

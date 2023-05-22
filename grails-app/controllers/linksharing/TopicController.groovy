@@ -13,7 +13,7 @@ class TopicController {
       flash.message = "Topic not found"
       redirect(controller: 'dashboard', action: 'index')
     }
-    def sub = topic.subsciptions
+
     def descriptionList = topic.resources.description
     def descriptionListSize = descriptionList.size()
     def topics = topicService.getTopics()
@@ -22,7 +22,7 @@ class TopicController {
     def noOfSubscriptions = subscriptionService.getSub()
     def s = noOfSubscriptions.size()
 
-    render(view: 'show', model: ['topics': topics,'topic': topic,'descriptionListSize':descriptionListSize, 'subscriptions': sub, 'descriptionList': descriptionList, subCount: s, topicCount: t])
+    render(view: 'show', model: ['topics': topics,'topic': topic,'descriptionListSize':descriptionListSize, 'descriptionList': descriptionList, subCount: s, topicCount: t])
   }
 
   def topicList() {
@@ -53,7 +53,7 @@ class TopicController {
   }
 
   def subscribe() {
-    def topic = Topic.get(params.topic)
+    def topic = Topic.get(params.topicId as Long)
     def user = User.findByUsername(session.user)
     def subscription = Subscription.findByUserAndTopic(user, topic)
     if (subscription) {

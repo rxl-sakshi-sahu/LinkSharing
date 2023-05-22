@@ -64,14 +64,11 @@
                         <div class="col-8">
                             <h4>Welcome, ${session.user}!</h4>
                             %{--                                <p>Your email address is: ${session.user.email}</p>--}%
-                            <p style="margin-bottom: 0%;">@Uday</p>
-
+                            <p style="margin-bottom: 0%;">@${session.user}</p>
                             <div style="display: flex;">
                                 <p>Subscriptions</p>
-
                                 <p style="margin-left: auto;">Topic</p>
                             </div>
-
                             <g:form controller="dashboard" action="index">
                                 <div style="display: flex;">
                                         <a href="#" class="card-link">${subCount}</a>
@@ -85,23 +82,28 @@
             </div>
         </div>
         <!-- /*******************************  Subscriptions ******************* -->
-        <div class="card" style="width: 30rem; margin: 20px;">
-        <div class="card-header" style="display: flex;">
+%{--        <g:each class="card" style="width: 30rem; margin: 20px;">--}%
+        <div class="card" style="width: 30rem; padding: 0px; margin: 20px;">
+
+            <div class="card-header" style="display: flex;">
             <p>Subscriptions</p>
             <a href="#" class="card-link" style="margin-left: auto;">View All</a>
         </div>
-
-        <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
+        <%def cnt =5%>
+        <g:each var="topicsList"  in="${latestSubscribedTopics}" status="loopStatus">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
                              style="height: 65px; width: 60px">
                     </div>
 
                     <div class="col-sm-9">
-                    <g:link controller="topic" action="show" class="card-link"
-                            style="margin-left: auto;">Grails</g:link>
+                            <g:if test="${cnt>0}">
+                                <%cnt-- %>
+                                <h4>${topicsList.topicName}</h4>
+                            </g:if>
                     <div class="row">
                     <p class="col">@Uday</p>
                     <p class="col">Subscriptions</p>
@@ -115,7 +117,9 @@
                 </div>
             </div>
         </div>
+    </g:each>
     </div>
+</div>
 
         %{--        *****************************  Trending Topics ****************************--}%
         <div class="card" style="width: 30rem; padding: 0px; margin: 20px;">
@@ -156,11 +160,11 @@
     </div>
 
 
-        <!-- /*******************************  Subscriptions end ******************* -->
+        <!-- /******************************* Inbox  ******************* -->
     </div>
 
     <div class="col-sm-6">
-        <div class="card" style="width: 45rem; margin: 10px;">
+        <div class="card" style="width: 40rem; margin: 20px; margin-left: 0px;">
             <div class="card-header" style="display: flex;">
                 <p>Inbox</p>
                 <a href="#" class="card-link" style="margin-left: auto;">View All</a>
@@ -168,16 +172,23 @@
 
             <div class="card-body">
                 <g:each var="des" in="${descriptionList}">
-                    <div class="container">
+                    <div class="post" id="post-12">
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-2">
                                 <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
                                      style="height: 65px; width: 60px">
                             </div>
 
-                            <div class="col-8">
+                            <div class="col-10">
                                 <p>${des}</p>
+                                <div style="display: inline">
+                                    <a href="#">Download</a>
+                                    <a href="#" style="margin:20px">View full site</a>
+                                    <a href="#" class="mark-as-read" data-post-id="12" style="margin:20px" >Mark as read</a>
+                                    <g:link  controller="dashboard" action="viewPost" params="[descriptn :des]">View Post</g:link>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <hr>
@@ -186,8 +197,21 @@
         </div>
     </div>
 </div>
-</div>
 
+
+%{--<script>--}%
+%{--    $(document).ready(function() {--}%
+%{--        $('.mark-as-read').on('click', function(e) {--}%
+%{--            e.preventDefault();--}%
+
+%{--            var postId = $(this).data('post-id');--}%
+%{--            var postDiv = $('#post-' + postId);--}%
+
+%{--            postDiv.hide();--}%
+%{--        });--}%
+%{--    });--}%
+
+%{--</script>--}%
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
@@ -206,4 +230,4 @@
         crossorigin="anonymous"></script>
 </body>
 
-</html>
+i</html>

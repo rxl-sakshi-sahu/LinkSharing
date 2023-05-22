@@ -11,7 +11,7 @@ class Topic {
 
     VisibilityEnum visibilityEnum
 
-    static hasMany = [resources: Resource, subsciptions: Subscription]
+    static hasMany = [resources: Resource, subscriptions: Subscription]
     static belongsTo= [createdBy: User]
     static constraints = {
    //     topicName(blank: false, unique: ['createdBy'])
