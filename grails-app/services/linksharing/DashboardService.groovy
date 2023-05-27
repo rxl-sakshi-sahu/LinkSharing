@@ -13,6 +13,18 @@ class DashboardService {
         subscribedTopics = subscribedTopics.sort { it.dateCreated }.reverse()
         //println subscribedTopics
         return subscribedTopics
+
+
+//        def user = username
+//        def subscribedTopics = Topic.createCriteria().list {
+//            subscriptions {
+//                eq('user', user)
+//            }
+//            order('dateCreated', 'desc')
+//            //maxResults(5)
+//        }
+//        return subscribedTopics
+
     }
     def trendingTopics() { // topics based on max no. of posts
         def c = Resource.createCriteria().list {

@@ -29,8 +29,10 @@ class TopicService {
         {
              getListByRole = Topic.findAllByVisibilityEnum('PUBLIC' as VisibilityEnum)
         }
+
         return getListByRole
     }
+
 
     def serviceMethod() {
 

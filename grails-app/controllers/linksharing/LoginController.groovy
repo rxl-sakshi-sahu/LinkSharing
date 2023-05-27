@@ -3,6 +3,11 @@ package linksharing
 class LoginController {
 
     def index() {
+//        if (session.user) {
+//            render "You are already logged in."
+//        } else {
+//            redirect(controller: 'user', action: 'index')
+//        }
         redirect(controller:'user', action:'index')
     }
 
@@ -12,6 +17,7 @@ class LoginController {
     }
 
     def auth() {
+
         User user = User.findByUsernameOrEmail(params?.email, params?.email)
         print params
         if(!user)
@@ -26,6 +32,7 @@ class LoginController {
             if (user?.password == params?.password && user?.active== true) {
                 session.user = user.username
                 session.isAdmin = user.admin
+
                 redirect(controller: "Dashboard", action: "index")
                 return
             }

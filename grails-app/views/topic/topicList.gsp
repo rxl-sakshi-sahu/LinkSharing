@@ -69,7 +69,7 @@
     </tr>
     </thead>
     <tbody>
-    <g:each in="${getList}" var="t">
+    <g:each in="${getList.sort { a, b -> a.topicName.compareTo(b.topicName) }}" var="t">
         <tr>
         <td>
             <g:link controller="topic" action="show" params="[topicName: t.topicName]">
@@ -87,11 +87,6 @@
                 <button class="subscribe-button" data-topic-id="${t.id}">Subscribe</button>
                 </g:else>
 
-%{--                    <button class="unsubscribe-button" data-topic-id="${t.id}">Unsubscribe</button>--}%
-%{--                </g:if>--}%
-%{--                <g:else>--}%
-%{--                    <button class="subscribe-button" data-topic-id="${t.id}">Subscribe</button>--}%
-%{--                </g:else>--}%
             </td>
         </tr>
     </g:each>
@@ -145,10 +140,6 @@
             });
         });
     });
-
-
-
-
 
 </script>
 </body>

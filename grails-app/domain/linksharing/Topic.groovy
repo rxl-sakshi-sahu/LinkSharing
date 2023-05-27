@@ -14,13 +14,15 @@ class Topic {
     static hasMany = [resources: Resource, subscriptions: Subscription]
     static belongsTo= [createdBy: User]
     static constraints = {
-   //     topicName(blank: false, unique: ['createdBy'])
+        topicName(blank: false, unique: ['createdBy'])
 //        dateCreated blank: false, date: true
 //        lastUpdated blank: false, date: true
       //  visibilityEnum enumType: 'string'
     }
     static mapping = {
         autoTimestamp(true)
+        //sort topicName: 'asc'
+
     }
 
 }

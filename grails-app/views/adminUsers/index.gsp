@@ -13,7 +13,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -22,8 +23,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+%{--    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>--}%
+%{--    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>--}%
 </head>
 
 <body>
@@ -44,6 +45,7 @@
     </g:if>
 
     <script>
+
         function showError(){
             document.getElementById('error-alert').removeAttribute('style')
             $('#error-alert').fadeTo(2000,500).slideUp(500, function(){
@@ -51,11 +53,18 @@
             });
         }
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"> </script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"> </script>
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script>
 </div>
-        <table class="table">
+<table id="myTable" class="display" style="width:100%">
             <thead>
             <tr>
-                <th scope="col">Id</th>
+
                 <th scope="col">Username</th>
                 <th scope="col">Email</th>
                 <th scope="col">Firstname</th>
@@ -67,7 +76,7 @@
             <tbody>
                 <g:each in="${users}" var="user">
                     <tr>
-                        <td>${user.id}</td>
+
                         <td>${user.username}</td>
                         <td>${user.email}</td>
                         <td>${user.firstName}</td>
@@ -102,10 +111,12 @@
                 </g:each>
             </tbody>
         </table>
+%{--<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>--}%
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+%{--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>--}%
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 

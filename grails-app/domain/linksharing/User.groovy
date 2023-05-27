@@ -15,7 +15,7 @@ class User {
     static hasMany = [topic: Topic, subscription: Subscription, resource: Resource, readingItem: ReadingItem]
     static constraints = {
         email email: true, blank: false, unique: true
-        username blank: true
+        username blank: true, unique:true
         firstName blank: false
         lastName blank: false
         password blank: false, minSize:3

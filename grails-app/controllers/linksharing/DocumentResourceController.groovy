@@ -3,8 +3,8 @@ package linksharing
 import org.springframework.web.multipart.MultipartFile
 
 class DocumentResourceController {
-   // def resourceService
-    def index(){
+    // def resourceService
+    def index() {
 //        def file = ResourceService.getfilePath()
 //        render(view:'index' , model: [users:users])
     }
@@ -25,35 +25,67 @@ class DocumentResourceController {
 //        redirect(controller: "dashboard", action: 'index')
 //    }
 
-    def upload(){
+    def upload() {
+        println "*****"
+        println params
         MultipartFile myFile = params.file
         File newFile = new File("/home/lt-sakshis/docResource/${myFile.originalFilename}");
         myFile.transferTo(newFile);
         String path = newFile.getAbsolutePath()
 
         Resource d = new DocumentResource()
-        User u=User.findByUsername(session.user)
-        d.createdBy= u
+        User u = User.findByUsername(session.user)
+        d.createdBy = u
+        d.filePath = path
         d.description = params.description
-        d.topic = params.topic
+        Topic topic = Topic.findById(params.topic)
+        print topic
+        d.topic = topic
         d.validate()
-        if(d.hasErrors())
-        {
-            d.errors.allErrors.each{
+        if (d.hasErrors()) {
+            d.errors.allErrors.each {
                 println it
             }
+        } else {
+
+            ReadingItem r = new ReadingItem()
+            r.resource = d
+            r.user = u
+            r.isRead = false
+
+            d.save(flush: true, failOnError: true)
+            r.save(flush: true, failOnError: true)
+            redirect(controller: "dashboard", action: 'index')
         }
-        else{
-            d.save(flush:true, failOnError:true)
+    }
+
+    def download() {
+        String filePath = "/home/lt-sakshis/docResource/"
+
+        File file = new File(filePath)
+        if (!file.exists() || !file.isFile()) {
+            flash.error= "file not found or invalid file"
         }
-        redirect(controller: "dashboard", action: 'index')
+
+        response.setContentType("application/octet-stream")
+        response.setHeader("Content-Disposition", "attachment; filename=${file.name}")
+        response.setContentLength(file.length().toInt())
+
+        try {
+            FileUtils.copyFile(file, response.outputStream)
+        } catch (IOException e) {
+            flash.error="error"
+        }
+        response.outputStream.flush()
+        response.outputStream.close()
+        render(model: ['filePath':filePath])
     }
 
 //    def download(){
 //       // File  downloadFile = new File(yourFileDomain?.pathProperty)
 //        DocumentResource r = Resource.findById(params.get("id") as long)
 //        File file = new File("${r.filePath}")
-//        Byte[] orderPDF = file.getBytes()
+//        Byte[]orderPDF = file.getBytes()
 //        if(downloadFile){
 //            response.characterEncoding = "UTF-8"
 //            response.setHeader "Content-disposition", "attachment; filename=\"${yourFileDomain?.fileNameProperty}\"" //add the header with the filename you saved in your domain you could also set a default filename
@@ -61,7 +93,7 @@ class DocumentResourceController {
 //            response.outputStream.flush()
 //            redirect(controller: "dashboard", action: 'index')
 //        }
-//    }
+
 
 //        def photoFile = request.getFile("photo")
 //        if (photoFile && !photoFile.isEmpty()) {
@@ -72,5 +104,6 @@ class DocumentResourceController {
 //            user.photo = 'assets/images/user.png'
 //        }
 
-}
 
+
+}

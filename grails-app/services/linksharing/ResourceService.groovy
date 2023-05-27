@@ -1,10 +1,20 @@
 package linksharing
 
+import enums.VisibilityEnum
 import grails.gorm.transactions.Transactional
 
 @Transactional
 class ResourceService {
 
+//    def recentShare(){
+//        return Resource.createCriteria().list{
+//            topic{
+//                eq('visibility', VisibilityEnum.PUBLIC)
+//            }
+////            maxResults(count)
+//            order('dateCreated', 'desc')
+//        }
+//    }
     def serviceMethod() {
 
     }

@@ -7,13 +7,33 @@ class TopicController {
   def topicService
   def subscriptionService
 
+//
+//  def latestSubscribedTopics(String username) {
+//    User user = User.findByUsername(username)
+//    def subscribedTopics = user.subscription*.topic
+//    subscribedTopics = subscribedTopics.sort { it.dateCreated }.reverse()
+//    //println subscribedTopics
+//    return subscribedTopics
+//  }
+
+//    def user = username
+//    def subscribedTopics = Topic.createCriteria().list {
+//      subscriptions {
+//        eq('user', user)
+//      }
+//      order('dateCreated', 'desc')
+//      //maxResults(5)
+//    }
+//    return subscribedTopics
+
+
   def show(String topicName) {
     def topic = Topic.findByTopicName(topicName)
     if (!topic) {
       flash.message = "Topic not found"
       redirect(controller: 'dashboard', action: 'index')
     }
-
+    def sub = topic.subscriptions
     def descriptionList = topic.resources.description
     def descriptionListSize = descriptionList.size()
     def topics = topicService.getTopics()
@@ -22,7 +42,11 @@ class TopicController {
     def noOfSubscriptions = subscriptionService.getSub()
     def s = noOfSubscriptions.size()
 
-    render(view: 'show', model: ['topics': topics,'topic': topic,'descriptionListSize':descriptionListSize, 'descriptionList': descriptionList, subCount: s, topicCount: t])
+    def UserSubscribedTopics = subscriptionService.getUserSubscribedTopics(session.user)
+
+    render(view: 'show', model: ['topics': topics,'subscriptions':sub,'topic': topic, 'descriptionListSize':descriptionListSize,
+                                 'descriptionList': descriptionList, subCount: s, topicCount: t,
+    'UserSubscribedTopics':UserSubscribedTopics])
   }
 
   def topicList() {
@@ -30,6 +54,7 @@ class TopicController {
   //  def topics = topicService.getTopics()
     def getList = topicService.topicListByRole(session.user)
     def size = getList.size()
+    print getList
     render(view: 'topicList', model: [ 'getList': getList,'size':size,'user': user])
   }
 

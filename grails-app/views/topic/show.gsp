@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<g:render template="/templates/navbar" model="[topics:topics]"/>
+<g:render template="/templates/navbar" model="['UserSubscribedTopics':UserSubscribedTopics, 'topics':topics]"/>
 <g:if test="${flash.message}">
     <div class="alert alert-success" onclick="showError()" id="error-alert">${flash.message}
         <button type="button" class="btn-close" data-dismiss='alert' aria-label="Close"
@@ -61,7 +61,7 @@
                             <div class="col"><a href="#" class="card-link">Grails</a></div>
                             <!-- <div style="display: flex;"> -->
                             <div class="row">
-                            <div class="col">@Uday</div>
+                            <div class="col">@${session.user}</div>
                             <div class="col">Subscriptions</div>
                             <div class="col">Posts</div>
                             <div class="w-100"></div>
@@ -81,7 +81,6 @@
             <a href="#" class="card-link" style="margin-left: auto;">View All</a>
         </div>
         <g:each  var="des" in="${subscriptions.user}">
-        %{--            {subscriptions.topic.createdBy.username}--}%
             <div class="card-body">
                 <div class="container">
                     <div class="row">

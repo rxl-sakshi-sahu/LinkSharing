@@ -40,7 +40,7 @@
                </a>
             </button>
             <button type="button" class="btn btn-link" style="color: black">
-                <a data-bs-toggle="modal" data-bs-target="#createTopic" data-bs-whatever="createTopic">
+                <a data-bs-toggle="modal" data-bs-target="#sendInvitation" data-bs-whatever="sendInvitation">
                     <i style="font-size:24px" class="fa">&#xf0e0;</i>
                 </a>
             </button>
@@ -71,20 +71,20 @@
                                 </div>
                                 <div class="mb-3 d-flex ">
                                     <label for="recipient-name" class="col-form-label me-5">Description: </label>
-                                    <input type="textarea" class="form-control" name="description" id="recipient-name">
+                                    <input type="textarea" class="form-control" name="description" id="recipient-name" required>
                                 </div>
                                 <div class="mb-3 d-flex justify-content-between">
-%{--                                   // <g:hiddenField name="createdBy" value="${user.id}"/>--}%
-                                    <label for="message-text" class="col-form-label me-5">Topic:</label>
-                                    <select class="form-select" name="topic" id="topic" aria-label="Default select example">
+                                    %{--                                   // <g:hiddenField name="createdBy" value="${user.id}"/>--}%
+                                    <label for="topic" class="col-form-label me-5">Topic:</label>
+                                    <select class="form-select" id="topic" name="topic" aria-label="Default select example">
                                         <option selected>Topics</option>
-                                        <g:each var="topic" in="${topics}">
-                                            <option value="${topic.id}">${topic.topicName}</option>
+                                        <g:each var="t" in="${UserSubscribedTopics}">
+                                            <option value="${t.topic.topicName}">${t.topic.topicName}</option>
                                         </g:each>
                                     </select>
                                 </div>
                                 <div class="modal-footer">
-                                    <g:actionSubmit class="btn btn-primary" value="submit" action="save">
+                                    <g:actionSubmit class="btn btn-primary" value="submit" controller="DocumentResource" action="upload">
                                         Register
                                     </g:actionSubmit>
                                     %{-- <button type="button" class="btn btn-primary">Invite </button>--}%
@@ -111,12 +111,12 @@
                             <g:uploadForm action="save" controller="LinkResource">
                                 <div class="mb-3 d-flex ">
                                     <label for="url" class="col-form-label me-5">Link </label>
-                                    <input type="text" class="form-control" name="url" id="url">
+                                    <input type="text" class="form-control" name="url" id="url" required>
 
                                 </div>
                                 <div class="mb-3 d-flex">
                                     <label for="description" class="col-form-label me-5">Description </label>
-                                    <textarea id="description" name="description" rows="3" cols="30"></textarea>
+                                    <textarea id="description" name="description" rows="3" cols="30" required></textarea>
                                 </div>
                             %{-- <g:hiddenField name="createdBy" value="${session.currentUser}" />--}%
                                 <div class="mb-3 d-flex justify-content-between">
@@ -124,8 +124,8 @@
                                     <label for="topic" class="col-form-label me-5">Topic:</label>
                                     <select class="form-select" id="topic" name="topic" aria-label="Default select example">
                                         <option selected>Topics</option>
-                                        <g:each var="t" in="${topics}">
-                                            <option value="${t.topicName}">${t.topicName}</option>
+                                        <g:each var="t" in="${UserSubscribedTopics}">
+                                            <option value="${t.topic.topicName}">${t.topic.topicName}</option>
                                         </g:each>
                                     </select>
                                 </div>
@@ -153,7 +153,7 @@
                             <g:form  controller="topic" action="index">
                                 <div class="mb-3 d-flex ">
                                     <label for="recipient-name" class="col-form-label me-5">Topic: </label>
-                                    <input type="text" class="form-control" name="topicName" id="topic">
+                                    <input type="text" class="form-control" name="topicName" id="topic" required>
                                 </div>
                             %{-- <g:hiddenField name="createdBy" value="${session.currentUser}" />--}%
                                 <div class="mb-3 d-flex justify-content-between">
@@ -172,6 +172,44 @@
                     </div>
                 </div>
             </div>
+
+%{--            ********************  Email  ********--}%
+            <div class="modal fade" id="sendInvitation" tabindex="-1" aria-labelledby="sendInvitation" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel12">Send Invitation</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <g:form  controller="dashboard" action="index">
+                                <div class="mb-3 d-flex ">
+                                    <label for="inviteEmail" class="col-form-label me-5">Email </label>
+                                    <input type="email" class="form-control" name="inviteEmail" id="inviteEmail" required>
+                                </div>
+                            %{-- <g:hiddenField name="createdBy" value="${session.currentUser}" />--}%
+                                <div class="mb-3 d-flex justify-content-between">
+                                    <label for="inviteTopic" class="col-form-label me-5">Topic:</label>
+                                    <select class="form-select" id="inviteTopic" name="inviteTopic" aria-label="Default select example">
+                                        <option selected>Topics</option>
+                                        <g:each var="t" in="${UserSubscribedTopics}">
+                                            <option value="${t.topic.topicName}">${t.topic.topicName}</option>
+                                        </g:each>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="${createLink(action: 'sendEmail')}" method="post">
+                                    <button type="submit" class="btn btn-primary">Invite</button>
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </g:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+%{--            ********************************--}%
+
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ${session.user}

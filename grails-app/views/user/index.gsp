@@ -37,19 +37,19 @@
 </g:if>
 
 <g:if test="${flash.error}">
-<div class="alert alert-danger" onclick="showError()" id="error-alert">${flash.error}
-    <button type="button" class="btn-close" data-dismiss='alert' aria-label="Close"
-            style="display: inline-block; margin-left: 70%"></button>
-</div>
+    <div class="alert alert-danger" onclick="showError()" id="error-alert">${flash.error}
+        <button type="button" class="btn-close" data-dismiss='alert' aria-label="Close"
+                style="display: inline-block; margin-left: 70%"></button>
+    </div>
 </g:if>
 
 <script>
-function showError(){
-    document.getElementById('error-alert').removeAttribute('style')
-    $('#error-alert').fadeTo(2000,500).slideUp(500, function(){
-$('#error-alert').slideUp(500);
-});
-}
+    function showError(){
+        document.getElementById('error-alert').removeAttribute('style')
+        $('#error-alert').fadeTo(2000,500).slideUp(500, function(){
+            $('#error-alert').slideUp(500);
+        });
+    }
 </script>
 
 
@@ -62,7 +62,8 @@ $('#error-alert').slideUp(500);
             </div>
 
             <div class="card-body" style="padding-bottom: 0%;">
-                <div class="container">
+<g:each in="${latestResources}" var="topics">
+    <div class="container">
                     <div class="row">
                         <div class="col-sm-3">
                             <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
@@ -70,10 +71,11 @@ $('#error-alert').slideUp(500);
                         </div>
 
                         <div class="col-8">
-                            <div class="col"><a href="#" class="card-link">Grails</a></div>
-                            <!-- <div style="display: flex;"> -->
+                            <g:link controller="topic" action="show" params="[topicName: topics.topic.topicName]">
+                                <h>${topics.topic.topicName}</h>
+                            </g:link>                            <!-- <div style="display: flex;"> -->
                             <div class="row">
-                                <div class="col">@Uday</div>
+                                <div class="col">@${topics.createdBy.username}</div>
 
                                 <div class="col">Subscriptions</div>
 
@@ -92,41 +94,42 @@ $('#error-alert').slideUp(500);
                         </div>
                     </div>
                 </div>
+</g:each>
             </div>
-            <hr>
+%{--            <hr>--}%
 
-            <div class="card-body" style="padding-top: 0%;">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
-                                 style="height: 65px; width: 60px">
-                        </div>
+%{--            <div class="card-body" style="padding-top: 0%;">--}%
+%{--                <div class="container">--}%
+%{--                    <div class="row">--}%
+%{--                        <div class="col-sm-3">--}%
+%{--                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"--}%
+%{--                                 style="height: 65px; width: 60px">--}%
+%{--                        </div>--}%
 
-                        <div class="col-8">
-                            <div class="col"><a href="#" class="card-link">Grails</a></div>
-                            <!-- <div style="display: flex;"> -->
-                            <div class="row">
-                                <div class="col">@Uday</div>
+%{--                        <div class="col-8">--}%
+%{--                            <div class="col"><a href="#" class="card-link">Grails</a></div>--}%
+%{--                            <!-- <div style="display: flex;"> -->--}%
+%{--                            <div class="row">--}%
+%{--                                <div class="col">@Uday</div>--}%
 
-                                <div class="col">Subscriptions</div>
+%{--                                <div class="col">Subscriptions</div>--}%
 
-                                <div class="col">Posts</div>
+%{--                                <div class="col">Posts</div>--}%
 
-                                <div class="w-100"></div>
+%{--                                <div class="w-100"></div>--}%
 
-                                <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
+%{--                                <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>--}%
 
-                                <div class="col"><a href="#" class="card-link">50</a></div>
+%{--                                <div class="col"><a href="#" class="card-link">50</a></div>--}%
 
-                                <div class="col"><a href="#" class="card-link">30</a></div>
+%{--                                <div class="col"><a href="#" class="card-link">30</a></div>--}%
 
-                                <!-- </div> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+%{--                                <!-- </div> -->--}%
+%{--                            </div>--}%
+%{--                        </div>--}%
+%{--                    </div>--}%
+%{--                </div>--}%
+%{--            </div>--}%
         </div>
 
         <div class="card" style="width: 35rem; margin: 30px;">
@@ -179,20 +182,12 @@ $('#error-alert').slideUp(500);
                             <!-- <div style="display: flex;"> -->
                             <div class="row">
                                 <div class="col">@Uday</div>
-
                                 <div class="col">Subscriptions</div>
-
                                 <div class="col">Posts</div>
-
                                 <div class="w-100"></div>
-
                                 <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
-
                                 <div class="col"><a href="#" class="card-link">50</a></div>
-
                                 <div class="col"><a href="#" class="card-link">30</a></div>
-
-                                <!-- </div> -->
                             </div>
                         </div>
                     </div>
@@ -204,7 +199,7 @@ $('#error-alert').slideUp(500);
 
     <div class="col-sm-4">
         <!--*********************  Login ********************************-->
-        <div class="card" style="width: 25rem; margin: 30px;">
+        <div class="card" style="width: 30rem; margin: 30px;">
             <div class="card-header">
                 <h4 style="text-align: center;"><strong>LOGIN</strong></h4>
             </div>
@@ -213,15 +208,16 @@ $('#error-alert').slideUp(500);
 
             <!--   Login details-->
                 <g:form controller='Login' action='auth'>
-                    <div class="form-outline mb-sm-0">
-                        <input type="text" id="mail" name="email" class="form-control" required/>
-                        <label class="form-label" for="email">Username / Email address</label>
-                    </div>
-                    <div class="form-outline" style="padding-bottom: 0%;">
-                        <input type="password" id="passwd" name="password" class="form-control" minlength="3" required/>
-                        <label class="form-label" for="password">Password</label>
-                    </div>
+                    <div class="form-outline mb-sm-0" style="display: flex; padding-bottom: 20px">
+                        <label class="form-label" for="email">Email/Username*</label>
+                        <input type="text" id="mail" name="email" class="form-control" maxlength="255" style="margin-left: 7%" required/>
 
+                    </div>
+                    <div class="form-outline" style="padding-bottom: 0%; display: flex " >
+                        <label class="form-label" for="password">Password*</label>
+                        <input type="password" id="passwd" name="password" class="form-control" minlength="3"
+                               maxlength="255" style="margin-left: 18%" required/>
+                    </div>
                     <div style="display: flex; padding-top: 0%;">
                         <a href="#">Forgot Password</a>
 
@@ -236,51 +232,33 @@ $('#error-alert').slideUp(500);
 
         <!--*******************************Login end **********************-->
         <!--*********************  Register ********************************-->
-    <div class="card" style="width: 25rem; margin: 30px;">
+    <div class="card" style="width: 30rem; margin: 30px;">
         <div class="card-header">
             <h4 style="text-align: center;"><strong>REGISTER</strong></h4>
         </div>
     <div class="card-body" style="padding-bottom: 0%;">
     <!-- first name -->
         <g:uploadForm controller='User' action='RegisterUser' method="POST">
-            <div class="form-outline mb-sm-2">
-                <input type="text" id="firstName" name="firstName" class="form-control form-control-lg" required/>
-                <label class="form-label" for="firstName">First Name*</label>
-            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label class="form-label" for="firstName" style="padding: 12%; padding-top: 20%">First Name*</label>
+                    <label class="form-label" for="lastName"  style="padding: 12%">Last Name*</label>
+                    <label class="form-label" for="email" style="padding: 12%">Email address*</label>
+                    <label class="form-label" for="username" style="padding: 12%">UserName*</label>
+                    <label class="form-label" for="password" style="padding: 12%">Password*</label>
+                    <label class="form-label" for="conf-pass" style="padding: 12%">Confirm Password*</label>
+                    <label class="form-label" for="photo" style="padding: 12%">Photo</label>
 
-            <!-- last name -->
-            <div class="form-outline mb-sm-2">
-                <input type="text" id="lastName" name="lastName" class="form-control form-control-lg" required/>
-                <label class="form-label" for="lastName">Last Name*</label>
-            </div>
-            <!--   Login details-->
-            <div class="form-outline mb-sm-0">
-                <input type="email" id="email" name="email" class="form-control" required/>
-                <label class="form-label" for="email">Email address*</label>
-            </div>
-
-            <div class="form-outline mb-sm-2">
-                <input type="text" id="username" name="username" class="form-control form-control-lg" required/>
-                <label class="form-label" for="username">UserName*</label>
-            </div>
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-                <input type="password" id="password" name="password" class="form-control" required/>
-                <label class="form-label" for="password">Password*</label>
-            </div>
-
-            <div class="form-outline mb-4">
-                <input type="password" id="conf-pass" class="form-control" required/>
-                <label class="form-label" for="conf-pass">Confirm Password*</label>
-            </div>
-
-            <div class="form-outline mb-4">
-                <input type="file" id="photo" name="photo" class="form-control"/>
-                <label class="form-label" for="photo">Photo</label>
-            </div>
-
-            <div style="padding-left: 60%; padding-top: 0%; padding-bottom: 2%;">
-                <button type="submit" class="btn btn-secondary">Register</button>
+                </div>
+                <div class="col-8">
+                    <input type="text" id="firstName" name="firstName" class="form-control form-control-lg" style=" width: 95%; height: 10%; margin: 7%" required/>
+                    <input type="text" id="lastName" name="firstName" class="form-control form-control-lg" style="width: 95%; height: 10%; margin: 7%" required/>
+                    <input type="email" id="email" name="email" class="form-control" style="width: 95%; height: 10%; margin: 7%" required/>
+                    <input type="text" id="username" name="username" class="form-control form-control-lg" style="width: 95%;height: 10%; margin: 7%" required/>
+                    <input type="password" id="password" name="password" class="form-control" style="width: 95%; height: 10%; margin: 7%" required/>
+                    <input type="password" id="conf-pass" name="confPass" class="form-control" style="width: 95%; height: 10%; margin: 7%" required/>
+                    <input type="file" id="photo" name="photo" class="form-control" style="width: 95%;"/>
+                </div>
             </div>
             </div>
             </div>

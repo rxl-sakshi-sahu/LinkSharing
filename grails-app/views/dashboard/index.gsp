@@ -29,7 +29,7 @@
         <button type="button" class="btn-close" data-dismiss='alert' aria-label="Close"
                 style="display: inline-block; margin-left: 70%"></button>
     </div>
-    </g:if>
+</g:if>
 
 <g:if test="${flash.error}">
     <div class="alert alert-danger" onclick="showError()" id="error-alert">${flash.error}
@@ -50,114 +50,120 @@
 
     <!-- ************* Card ******************** -->
 
+
     <div class="row">
-    <div class="col-sm-5">
-        <div class="card" style="width: 30rem;  margin: 20px;">
-            <div class="card-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
-                                 style="height: 65px; width: 60px">
-                        </div>
-
-                        <div class="col-8">
-                            <h4>Welcome, ${session.user}!</h4>
-                            %{--                                <p>Your email address is: ${session.user.email}</p>--}%
-                            <p style="margin-bottom: 0%;">@${session.user}</p>
-                            <div style="display: flex;">
-                                <p>Subscriptions</p>
-                                <p style="margin-left: auto;">Topic</p>
+        <div class="col-sm-6">
+            <div class="card" style="width: 30rem;  margin: 20px;">
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <g:link controller="dashboard" action="userProfile">
+                                    <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
+                                         style="height: 65px; width: 60px"/>
+                                </g:link>
                             </div>
-                            <g:form controller="dashboard" action="index">
+
+                            <div class="col-8">
+                                <h4>Welcome, ${session.user}!</h4>
+                                %{--                                <p>Your email address is: ${session.user.email}</p>--}%
+                                <p style="margin-bottom: 0%;">@${session.user}</p>
                                 <div style="display: flex;">
-                                        <a href="#" class="card-link">${subCount}</a>
-                                <g:link controller="topic" action="topicList" class="card-link"
-                                        style="margin-left: auto;">${topicCount}</g:link>
-                            </g:form>
-                        </div>
+                                    <p>Subscriptions</p>
+                                    <p style="margin-left: auto;">Topic</p>
+                                </div>
+                                <g:form controller="dashboard" action="index">
+                                    <div style="display: flex;">
+                                            <a href="#" class="card-link">${cnt}</a>
+                                    <g:link controller="topic" action="topicList" class="card-link"
+                                            style="margin-left: auto;">${topicCount}</g:link>
+                                </g:form>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /*******************************  Subscriptions ******************* -->
-%{--        <g:each class="card" style="width: 30rem; margin: 20px;">--}%
-        <div class="card" style="width: 30rem; padding: 0px; margin: 20px;">
+            <!-- /*******************************  Subscriptions ******************* -->
+            %{--        <g:each class="card" style="width: 30rem; margin: 20px;">--}%
+            <div class="card" style="width: 30rem; padding: 0px; margin: 20px;">
 
-            <div class="card-header" style="display: flex;">
-            <p>Subscriptions</p>
-            <a href="#" class="card-link" style="margin-left: auto;">View All</a>
-        </div>
-        <%def cnt =5%>
-        <g:each var="topicsList"  in="${latestSubscribedTopics}" status="loopStatus">
-            <div class="card-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
-                             style="height: 65px; width: 60px">
+                <div class="card-header" style="display: flex;">
+                    <p>Subscriptions</p>
+                    <a href="#" class="card-link" style="margin-left: auto;">View All</a>
+                </div>
+                <%def cnt =5%>
+                <g:each var="topicsList"  in="${latestSubscribedTopics}" status="loopStatus">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
+                                         style="height: 65px; width: 60px">
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <g:if test="${cnt>0}">
+                                        <%cnt-- %>
+                                        <h4>${topicsList.topicName}</h4>
+                                    </g:if>
+                                    <div class="row">
+                                        <p class="col">@Uday</p>
+                                        <p class="col">Subscriptions</p>
+                                        <p class="col">Posts</p>
+                                        <div class="w-100"></div>
+                                        <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
+                                        <div class="col"><a href="#" class="card-link">50</a></div>
+                                        <div class="col"><a href="#" class="card-link">30</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="col-sm-9">
-                            <g:if test="${cnt>0}">
-                                <%cnt-- %>
-                                <h4>${topicsList.topicName}</h4>
-                            </g:if>
-                    <div class="row">
-                    <p class="col">@Uday</p>
-                    <p class="col">Subscriptions</p>
-                    <p class="col">Posts</p>
-                    <div class="w-100"></div>
-                    <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
-                    <div class="col"><a href="#" class="card-link">50</a></div>
-                    <div class="col"><a href="#" class="card-link">30</a></div>
-                </div>
-                </div>
-                </div>
+                </g:each>
             </div>
         </div>
-    </g:each>
-    </div>
-</div>
 
         %{--        *****************************  Trending Topics ****************************--}%
         <div class="card" style="width: 30rem; padding: 0px; margin: 20px;">
-        <div class="card-header" style="display: flex;">
-            <p>Trending Topics</p>
-            <a href="#" class="card-link" style="margin-left: auto;">View All</a>
-        </div>
-        <%def count = 5%>
-        <g:each var="topics" in="${trendingTopics}" status="loopStatus">
-            <div class="card-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
-                                 style="height: 65px; width: 60px">
-                        </div>
+            <div class="card-header" style="display: flex;">
+                <p>Trending Topics</p>
+                <a href="#" class="card-link" style="margin-left: auto;">View All</a>
+            </div>
+            <%def count = 5%>
+            <g:each var="topics" in="${trendingTopics}" status="loopStatus">
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
+                                     style="height: 65px; width: 60px">
+                            </div>
 
-                        <div class="col-8">
-                            <g:if test="${count>0}">
-                                <%count-- %>
-                                <h4>${topics[0].topicName}</h4>
-                            </g:if>
-                            <div class="row">
-                                <div class="col">@Uday</div>
-                                <div class="col">Subscriptions</div>
-                                <div class="col">Posts</div>
-                                <div class="w-100"></div>
-                                <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
-                                <div class="col"><a href="#" class="card-link">50</a></div>
-                                <div class="col"><a href="#" class="card-link">30</a></div>
-                                <!-- </div> -->
+                            <div class="col-8">
+                                <g:if test="${count>0}">
+                                    <%count-- %>
+                                    <h4>${topics[0].topicName}</h4>
+                                </g:if>
+                                <div class="row">
+                                    <div class="col">@Uday</div>
+                                    <div class="col">Subscriptions</div>
+                                    <div class="col">Posts</div>
+                                    <div class="w-100"></div>
+
+%{--                <g:if test="${topics.subscriptions.find { it.user.username == session.user }}">--}%
+                                    <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
+%{--                </g:if>--}%
+                                    <div class="col"><a href="#" class="card-link">50</a></div>
+                                    <div class="col"><a href="#" class="card-link">30</a></div>
+                                    <!-- </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </g:each>
-    </div>
+            </g:each>
+        </div>
 
 
         <!-- /******************************* Inbox  ******************* -->
