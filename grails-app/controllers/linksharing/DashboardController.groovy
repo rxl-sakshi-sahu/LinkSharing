@@ -12,7 +12,7 @@ class DashboardController
     def subscriptionService
     def topicService
     def dashboardService
-    //def readingItemService
+    def readingItemService
     //def mailService
 
     def sendEmail(){
@@ -32,13 +32,12 @@ class DashboardController
         redirect(controller: "dashboard", action: "index")
     }
 
+
     def index() {
         def user= User.findByUsername(session.user)
         def topics = topicService.getTopics()
         def t= topics.findAll{ topic -> topic.createdBy==user}
         def topicCount = t.size()
-
-       // def getDescription = readingItemService.getDescription(session.user)
 
         def noOfSubscriptions = subscriptionService.getSub()
         def s = noOfSubscriptions.size()
@@ -46,7 +45,8 @@ class DashboardController
         def trendingTopics
         def latestSubscribedTopics
 
-
+        def getDescription = readingItemService.unReadResource(session.user)
+        print getDescription
         if(user) {
             countSubscriptionsByUser = user.subscription.size()
 
@@ -59,12 +59,17 @@ class DashboardController
                 return
         }
         render(view: 'index', model:[latestSubscribedTopics:latestSubscribedTopics, topicCount:topicCount,trendingTopics:trendingTopics,
-                                     subCount:s, cnt:countSubscriptionsByUser,topics:topics, 'UserSubscribedTopics': subscriptionService.getUserSubscribedTopics(session.user)])
+                                     subCount:s, getDescription:getDescription, cnt:countSubscriptionsByUser,topics:topics, 'UserSubscribedTopics': subscriptionService.getUserSubscribedTopics(session.user)])
     }
 
     def userProfile(){
         def getUserSubscribedTopics = subscriptionService.getUserSubscribedTopics(session.user)
         render(view:'userProfile', model: [getUserSubscribedTopics:getUserSubscribedTopics])
+    }
+
+    def viewPost(){
+        def trendingTopics = dashboardService.trendingTopics()
+        render(view: 'viewPost', model: [trendingTopics:trendingTopics])
     }
 
 }

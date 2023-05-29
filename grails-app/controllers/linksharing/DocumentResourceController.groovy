@@ -38,7 +38,7 @@ class DocumentResourceController {
         d.createdBy = u
         d.filePath = path
         d.description = params.description
-        Topic topic = Topic.findById(params.topic)
+        Topic topic = Topic.findByTopicName(params.topic)
         print topic
         d.topic = topic
         d.validate()

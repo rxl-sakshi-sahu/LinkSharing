@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-8">
                                 <div style="display: flex;">
-                                    <h4>Uday Pratap</h4>
+                                    <h4>${params.descriptn}</h4>
                                     <a href="#" style=" margin-left: 30px;">Grails</a>
                                 </div>
                                 <p style="margin-bottom: 0%;">@Uday</p>

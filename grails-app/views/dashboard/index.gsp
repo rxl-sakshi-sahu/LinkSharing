@@ -1,3 +1,4 @@
+<%@ page import="linksharing.DocumentResource" %>
 <!doctype html>
 <html lang="en">
 
@@ -146,16 +147,16 @@
                                     <h4>${topics[0].topicName}</h4>
                                 </g:if>
                                 <div class="row">
-                                    <div class="col">@Uday</div>
+                                    <div class="col">@${topics[0].createdBy.username}</div>
                                     <div class="col">Subscriptions</div>
                                     <div class="col">Posts</div>
                                     <div class="w-100"></div>
 
-%{--                <g:if test="${topics.subscriptions.find { it.user.username == session.user }}">--}%
+                <g:if test="${topics[0].subscriptions.find { it.user.username == session.user }}">
                                     <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
-%{--                </g:if>--}%
-                                    <div class="col"><a href="#" class="card-link">50</a></div>
-                                    <div class="col"><a href="#" class="card-link">30</a></div>
+                </g:if>
+                                    <div class="col"><a href="#" class="card-link">${topics[0].subscriptions.size()}</a></div>
+                                    <div class="col"><a href="#" class="card-link">${topics[0].resources.size()}</a></div>
                                     <!-- </div> -->
                                 </div>
                             </div>
@@ -176,9 +177,9 @@
                 <a href="#" class="card-link" style="margin-left: auto;">View All</a>
             </div>
 
-            <div class="card-body">
-                <g:each var="des" in="${descriptionList}">
-                    <div class="post" id="post-12">
+            <div class="card-body" >
+                <g:each var="des" in="${getDescription}">
+                    <div class="post" id="mark-as-read">
                         <div class="row">
                             <div class="col-2">
                                 <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
@@ -186,15 +187,20 @@
                             </div>
 
                             <div class="col-10">
-                                <p>${des}</p>
+                                <p>${des.description}</p>
                                 <div style="display: inline">
-                                    <a href="#">Download</a>
+                                    <g:if test="${(des.class == linksharing.DocumentResource)}">
+                                        <g:link controller="documentResource" action="download">Download</g:link>
+%{--                                    <a href="#">Download</a></g:if>--}%
+                                    </g:if>
+                                    <g:else>
                                     <a href="#" style="margin:20px">View full site</a>
-                                    <a href="#" class="mark-as-read" data-post-id="12" style="margin:20px" >Mark as read</a>
-                                    <g:link  controller="dashboard" action="viewPost" params="[descriptn :des]">View Post</g:link>
+                                    </g:else>
+
+                                    <a href="#" id="mark-as-read" onclick="hideDiv()" style="margin:20px" >Mark as read</a>
+                                    <g:link  controller="dashboard" action="viewPost" params="[descriptn :des.description]">View Post</g:link>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <hr>
@@ -204,20 +210,16 @@
     </div>
 </div>
 
-
-%{--<script>--}%
-%{--    $(document).ready(function() {--}%
-%{--        $('.mark-as-read').on('click', function(e) {--}%
-%{--            e.preventDefault();--}%
-
-%{--            var postId = $(this).data('post-id');--}%
-%{--            var postDiv = $('#post-' + postId);--}%
-
-%{--            postDiv.hide();--}%
-%{--        });--}%
-%{--    });--}%
-
-%{--</script>--}%
+<script>
+    function hideDiv() {
+        var div = document.getElementById("mark-as-read");
+        if (div.style.display === "none") {
+            div.style.display = "block";
+        } else {
+            div.style.display = "none";
+        }
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

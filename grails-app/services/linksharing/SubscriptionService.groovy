@@ -14,8 +14,17 @@ class SubscriptionService {
     List<Subscription>getUserSubscribedTopics(String username) {
         def loggedInUser = User.findByUsername(username)
         Subscription.findAllByUser(loggedInUser)
+
+//        def user = username
+//        def subscribedTopics = Topic.createCriteria().list {
+//            subscriptions {
+//                eq('user', user)
+//            }
+//            order('dateCreated', 'desc')
+//            //maxResults(5)
+//        }
+//        return subscribedTopics
     }
-// 'subscribedTopics' now contains the list of topics that the logged-in user has subscribed to
 
     def serviceMethod() {
 
