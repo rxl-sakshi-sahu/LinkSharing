@@ -63,8 +63,15 @@ class DashboardController
     }
 
     def userProfile(){
+        def user= User.findByUsername(session.user)
+        def countSubscriptionsByUser = user.subscription.size()
+
+        def topics = topicService.getTopics()
+        def t= topics.findAll{ topic -> topic.createdBy==user}
+        def topicCount = t.size()
+
         def getUserSubscribedTopics = subscriptionService.getUserSubscribedTopics(session.user)
-        render(view:'userProfile', model: [getUserSubscribedTopics:getUserSubscribedTopics])
+        render(view:'userProfile', model: [getUserSubscribedTopics:getUserSubscribedTopics, topicCount:topicCount, cnt:countSubscriptionsByUser])
     }
 
     def viewPost(){

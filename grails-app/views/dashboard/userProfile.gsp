@@ -33,21 +33,24 @@
         <!-- #######################33 -->
         <div class="col-sm-4">
 
-            <div class="card" style="width: 25rem;  margin: 20px;">
+            <div class="card" style="width: 30rem;  margin: 20px;">
                 <div class="card-body">
                     <div class="container">
                         <div class="row">
-
+                            <div class="col-sm-3">
+                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
+                                     style="height: 65px; width: 60px">
+                            </div>
                             <div class="col-8">
-                                <h4>Uday Pratap</h4>
-                                <p style="margin-bottom: 0%;">@Uday</p>
+                                <h4>${session.user}</h4>
+                                <p style="margin-bottom: 0%;">@${session.user}</p>
                                 <div style="display: flex;">
                                     <p>Subscriptions</p>
                                     <p style="margin-left: auto;">Topic</p>
                                 </div>
                                 <div style="display: flex;">
-                                    <a href="#" class="card-link">50</a>
-                                    <a href="#" class="card-link" style="margin-left: auto;">30</a>
+                                    <a href="#" class="card-link">${cnt}</a>
+                                    <a href="#" class="card-link" style="margin-left: auto;">${topicCount}</a>
                                 </div>
                             </div>
                         </div>
@@ -55,61 +58,45 @@
                 </div>
             </div>
 
-            <div class="card" style="width: 25rem; margin: 30px;">
+%{--        **********************************--}%
+            <div class="card" style="width: 30rem; margin: 30px;">
                 <div class="card-header">
                     <p>Topics</p>
                 </div>
-                <div class="card-body" style="padding-bottom: 0%;">
+                <g:each in="${getUserSubscribedTopics}" var="t">
+
+                    <div class="card-body" style="padding-bottom: 0%;">
                     <div class="container">
                         <div class="row">
-                            <div class="col-sm-3">
+                                <div class="col-sm-3">
                                 <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
-                                     style="height: 65px; width: 60px">                            </div>
+                                     style="height: 65px; width: 60px">
+                                </div>
                             <div class="col-8">
-                                <g:each in="${getUserSubscribedTopics}" var="t">
-                                <div class="col"><a href="#" class="card-link">${t}</a></div>
-                                </g:each>
+                                <div class="col"><a href="#" class="card-link">${t.topic.topicName}</a></div>
                                 <!-- <div style="display: flex;"> -->
                                 <div class="row">
-                                    <div class="col">@Uday</div>
+                                    <div class="col">@${t.topic.createdBy.username}</div>
                                     <div class="col">Subscriptions</div>
                                     <div class="col">Posts</div>
                                     <div class="w-100"></div>
+                    <g:if test="${t.topic.subscriptions.find { it.user.username == session.user }}">
                                     <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
-                                    <div class="col"><a href="#" class="card-link">50</a></div>
-                                    <div class="col"><a href="#" class="card-link">30</a></div>
+                    </g:if>
+                                    <div class="col"><a href="#" class="card-link">${t.topic.subscriptions.size()}</a></div>
+                                    <div class="col"><a href="#" class="card-link">${t.topic.resources.size()}</a></div>
 
                                     <!-- </div> -->
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="card-body" style="padding-top: 0%;">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
-                                     style="height: 65px; width: 60px">                            </div>
-                            <div class="col-8">
-                                <div class="col"><a href="#" class="card-link">Grails</a></div>
-                                <!-- <div style="display: flex;"> -->
-                                <div class="row">
-                                    <div class="col">@Uday</div>
-                                    <div class="col">Subscriptions</div>
-                                    <div class="col">Posts</div>
-                                    <div class="w-100"></div>
-                                    <div class="col"><a href="#" class="card-link">Unsubscribe</a></div>
-                                    <div class="col"><a href="#" class="card-link">50</a></div>
-                                    <div class="col"><a href="#" class="card-link">30</a></div>
 
-                                    <!-- </div> -->
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
+                    <hr>
+                            </g:each>
+
             </div>
             <!-- /*******************************  Subscriptions ******************* -->
             <div class="card" style="width: 25rem;  margin: 30px;">
@@ -117,30 +104,7 @@
                     <p>Subscriptions</p>
                     <a href="#" class="card-link" style="margin-left: auto;">View All</a>
                 </div>
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <img src="${resource(dir: 'images', file: 'user.png')}" alt="user"
-                                     style="height: 65px; width: 60px">                            </div>
-                            <div class="col-8">
-                                <div class="col"><a href="#" class="card-link">Grails</a></div>
-                                <!-- <div style="display: flex;"> -->
-                                <div class="row">
-                                    <div class="col">Subscriptions</div>
-                                    <div class="col">Topics</div>
-                                    <div class="w-100"></div>
-                                    <div class="col"><a href="#" class="card-link">50</a></div>
-                                    <div class="col"><a href="#" class="card-link">30</a></div>
 
-                                    <!-- </div> -->
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
                 <div class="card-body" style="padding-top: 0%;">
                     <div class="container">
                         <div class="row">
@@ -169,7 +133,7 @@
 
             <!-- /*******************************  Subscriptions end ******************* -->
         </div>
-        <!-- ###################333 -->
+        <!-- ###################  Post #######3 -->
         <div class="col-sm-8">
             <div class="card" style="width: 40rem; margin: 20px; margin-left: 100px;">
                 <div class="card-header" style="display: flex;">
